@@ -3,7 +3,7 @@ package com.oofga.ep.veiculos;//
 // Created by rhuan on 17/05/19.
 // ep2
 //
-abstract class Veiculo {
+public abstract class Veiculo {
     public static final int COMBUSTIVEL_DIESEL = 0;
     public static final int COMBUSTIVEL_ALCOOL = 1;
     public static final int COMBUSTIVEL_GASOLINA = 2;
