@@ -9,6 +9,7 @@ public class Carro extends Veiculo {
         setRendimento(14);
         setVelocidade_media(100);
         setConstante_variacao(0.025d);
+        setTipo("Carro");
     }
 
     @Override

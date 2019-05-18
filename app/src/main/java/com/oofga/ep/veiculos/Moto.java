@@ -9,6 +9,7 @@ public class Moto extends Veiculo {
         setRendimento(50);
         setVelocidade_media(110);
         setConstante_variacao(0.3d);
+        setTipo("Moto");
     }
 
     @Override

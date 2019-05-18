@@ -4,18 +4,27 @@ package com.oofga.ep.veiculos;//
 // ep2
 //
 public abstract class Veiculo {
-    public static final int COMBUSTIVEL_DIESEL = 0;
-    public static final int COMBUSTIVEL_ALCOOL = 1;
-    public static final int COMBUSTIVEL_GASOLINA = 2;
+    public final int COMBUSTIVEL_DIESEL = 0;
+    public final int COMBUSTIVEL_ALCOOL = 1;
+    public final int COMBUSTIVEL_GASOLINA = 2;
 
     protected static double preco_alcool = 3.499d;
     protected static double preco_gasolina = 4.449d;
     protected static double preco_diesel = 3.869d;
 
+    private String tipo;
     private double rendimento;
     private double carga_maxima;
     private double velocidade_media;
     private double constante_variacao;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        Veiculo.tipo = tipo;
+    }
 
     public double getRendimento() {
         return rendimento;

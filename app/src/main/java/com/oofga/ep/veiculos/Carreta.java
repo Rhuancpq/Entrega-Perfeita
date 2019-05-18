@@ -9,6 +9,7 @@ public class Carreta extends Veiculo {
         setRendimento(8);
         setVelocidade_media(60d);
         setConstante_variacao(0.0002d);
+        setTipo("Carreta");
     }
 
     @Override

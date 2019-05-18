@@ -9,6 +9,7 @@ public class Van extends Veiculo {
         setRendimento(10);
         setVelocidade_media(80);
         setConstante_variacao(0.001d);
+        setTipo("Van");
     }
 
     @Override
