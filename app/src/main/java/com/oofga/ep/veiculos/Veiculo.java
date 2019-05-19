@@ -17,13 +17,26 @@ public abstract class Veiculo {
     private double carga_maxima;
     private double velocidade_media;
     private double constante_variacao;
+    private boolean disponivel = true;
+
+    public boolean estaDisponivel(){
+        return disponivel;
+    }
+
+    public void tornaIndisponivel(){
+        disponivel = false;
+    }
+
+    public boolean suportaCarga(double carga){
+        return carga <= carga_maxima;
+    }
 
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
-        Veiculo.tipo = tipo;
+        this.tipo = tipo;
     }
 
     public double getRendimento() {
