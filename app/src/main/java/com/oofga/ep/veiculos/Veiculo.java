@@ -27,8 +27,8 @@ public abstract class Veiculo {
         disponivel = false;
     }
 
-    public boolean suportaCarga(double carga){
-        return carga <= carga_maxima;
+    public boolean naoSuportaCarga(double carga){
+        return carga > carga_maxima;
     }
 
     public String getTipo() {

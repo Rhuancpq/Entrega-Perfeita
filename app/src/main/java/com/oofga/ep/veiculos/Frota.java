@@ -51,7 +51,7 @@ public class Frota {
         String tipo_veiculo = "";
         double tempo = 0;
         for (Veiculo x : lista) {
-            if (!x.suportaCarga(carga)) {
+            if (x.naoSuportaCarga(carga)) {
                 continue;
             }
             if (x.calculaTempo(distancia) > tempoMax) {
@@ -82,7 +82,7 @@ public class Frota {
         String tipoVeiculo = "";
         double menorTempo = 0;
         for (Veiculo x : lista) {
-            if (!x.suportaCarga(carga)) {
+            if (!x.naoSuportaCarga(carga)) {
                 continue;
             }
             if (x.calculaTempo(distancia) > tempoMax) {
@@ -113,7 +113,7 @@ public class Frota {
         String tipoVeiculo = "";
         double menorTempo = 0;
         for (Veiculo x : lista) {
-            if (!x.suportaCarga(carga)) {
+            if (!x.naoSuportaCarga(carga)) {
                 continue;
             }
             if (x.calculaTempo(distancia) > tempoMax) {
