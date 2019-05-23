@@ -61,4 +61,118 @@
                                           android:id="@+id/guideline5"
                                           android:orientation="vertical"
                                           app:layout_constraintGuide_percent="0.5"/>
+    <TextView
+            android:text="Carreta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carreta"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintBottom_toTopOf="@+id/carro"
+            app:layout_constraintVertical_chainStyle="spread" app:layout_constraintEnd_toStartOf="@+id/carretaOut"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="Carro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carro"
+            app:layout_constraintTop_toBottomOf="@+id/carreta"
+            app:layout_constraintBottom_toTopOf="@+id/moto" app:layout_constraintEnd_toStartOf="@+id/carroOut"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="Moto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/moto"
+            app:layout_constraintTop_toBottomOf="@+id/carro"
+            app:layout_constraintBottom_toTopOf="@+id/van" app:layout_constraintEnd_toStartOf="@+id/motoOut"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="Van"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/van"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/moto"
+            app:layout_constraintEnd_toStartOf="@+id/vanOut" android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carretaOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintVertical_chainStyle="spread" app:layout_constraintTop_toTopOf="@+id/carreta"
+    />
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carroOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintTop_toTopOf="@+id/carro"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/motoOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintTop_toTopOf="@+id/moto"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vanOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
+            app:layout_constraintTop_toTopOf="@+id/van"/>
+    <TextView
+            android:text="Disponíveis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Dispo"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintBottom_toTopOf="@+id/carretaOut"
+            app:layout_constraintStart_toStartOf="@+id/carretaOut"/>
+    <TextView
+            android:text="Ocupados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Ocupado" app:layout_constraintStart_toStartOf="@+id/carretaInd"
+            app:layout_constraintTop_toTopOf="@+id/Dispo"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carretaInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/view" app:layout_constraintBottom_toTopOf="@+id/carroInd"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carroInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/carretaInd"
+            app:layout_constraintBottom_toTopOf="@+id/motoInd"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/motoInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/carroInd"
+            app:layout_constraintBottom_toTopOf="@+id/vanInd"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/vanInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
+            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motoInd"/>
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Entrega Perfeita</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Configurações</string>
+    <string name="margem_de_lucro">Margem de Lucro:</string>
+    <string name="ok">OK</string>
+    <string name="percent">%</string>
 </resources>
