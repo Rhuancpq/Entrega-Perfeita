@@ -13,10 +13,8 @@ public abstract class Veiculo {
     protected static double preco_diesel = 3.869d;
 
     private String tipo;
-    private double rendimento;
     private double carga_maxima;
     private double velocidade_media;
-    private double constante_variacao;
     private boolean disponivel = true;
 
     public boolean estaDisponivel(){
@@ -39,14 +37,6 @@ public abstract class Veiculo {
         this.tipo = tipo;
     }
 
-    public double getRendimento() {
-        return rendimento;
-    }
-
-    public void setRendimento(double rendimento) {
-        this.rendimento = rendimento;
-    }
-
     public double getCarga_maxima() {
         return carga_maxima;
     }
@@ -63,19 +53,9 @@ public abstract class Veiculo {
         this.velocidade_media = velocidade_media;
     }
 
-    public double getConstante_variacao() {
-        return constante_variacao;
-    }
+    abstract double calculaRendimento(double carga, int tipoCombustivel);
 
-    public void setConstante_variacao(double constante_variacao) {
-        this.constante_variacao = constante_variacao;
-    }
-
-    double calculaRendimento(double carga) {
-        return rendimento - carga * constante_variacao;
-    }
-
-    abstract double calculaCusto(double distancia, double carga, int tipo_combustivel);
+    abstract double calculaCusto(double distancia, double carga, int tipoCombustivel);
 
     double calculaTempo(double distancia) {
         return distancia / velocidade_media;

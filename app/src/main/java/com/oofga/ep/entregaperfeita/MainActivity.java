@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft = fm.beginTransaction();
             SettingsFragment settingsFragment = new SettingsFragment();
             ft.add(R.id.settingsContainer,settingsFragment);
-            //ft.addToBackStack(null);
+            ft.addToBackStack(null);
             ft.commit();
             return true;
         }
