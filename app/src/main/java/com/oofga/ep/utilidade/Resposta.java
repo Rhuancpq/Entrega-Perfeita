@@ -1,4 +1,4 @@
-package com.oofga.ep.entrega;//
+package com.oofga.ep.utilidade;//
 
 // Created by rhuan on 17/05/19.
 // ep2

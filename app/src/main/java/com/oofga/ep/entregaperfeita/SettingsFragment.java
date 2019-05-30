@@ -13,13 +13,38 @@ import android.widget.EditText;
 // ep2
 //
 public class SettingsFragment extends Fragment {
-    private static EditText edittext;
+
+    SettingsListener activityCallback;
+    public interface SettingsListener {
+        public void onButtonClick();
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            activityCallback = (SettingsListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " Deve implementar SettingsListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.settings_fragment, container,false);
+        final Button button =
+                (Button) view.findViewById(R.id.buttonOk);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                buttonClicked(v);
+            }
+        });
         return view;
+    }
+
+    public void buttonClicked (View view) {
+        activityCallback.onButtonClick();
     }
 
 

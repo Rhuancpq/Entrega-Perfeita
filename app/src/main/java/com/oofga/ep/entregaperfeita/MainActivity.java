@@ -3,6 +3,7 @@ package com.oofga.ep.entregaperfeita;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,11 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import com.oofga.ep.veiculos.Frota;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SettingsFragment.SettingsListener {
     Frota frota = new Frota();
+    SettingsFragment settingsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingsFragment = new SettingsFragment();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            SettingsFragment settingsFragment = new SettingsFragment();
             ft.add(R.id.settingsContainer,settingsFragment);
             ft.addToBackStack(null);
             ft.commit();
@@ -89,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onButtonClick(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(settingsFragment);
+        ft.commit();
     }
 
 }

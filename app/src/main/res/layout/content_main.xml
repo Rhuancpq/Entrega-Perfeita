@@ -1,178 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main"
-        tools:context=".MainActivity">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
     <View
-            android:layout_width="wrap_content"
-            android:layout_height="57dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/view" app:layout_constraintHorizontal_bias="1.0"
-            android:visibility="visible"
-            android:foreground="@android:color/darker_gray" app:layout_constraintVertical_bias="0.00999999"/>
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#E1F5FE"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:background="#8D18201F"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999" />
+
     <Button
-            android:text="Adicionar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            style="@android:style/Widget.Holo.Button.Small"
-            android:id="@+id/button1"
-            app:layout_constraintTop_toTopOf="@+id/view" app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@+id/view" android:layout_marginLeft="8dp"/>
+        android:id="@+id/bntAdicionar"
+        style="@android:style/Widget.Holo.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Adicionar"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/btnRemover"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-            android:text="Remover"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:id="@+id/button2"
-            style="@android:style/Widget.Holo.Button.Small"
-            app:layout_constraintTop_toTopOf="@+id/view" app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintStart_toEndOf="@+id/button1" android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5" android:layout_marginRight="8dp"/>
+        android:id="@+id/btnRemover"
+        style="@android:style/Widget.Holo.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Remover"
+        app:layout_constraintBottom_toBottomOf="@+id/bntAdicionar"
+        app:layout_constraintEnd_toStartOf="@+id/btnDesocupar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bntAdicionar"
+        app:layout_constraintTop_toTopOf="@+id/bntAdicionar" />
+
     <Button
-            android:text="Calcular"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:id="@+id/button3"
-            style="@android:style/Widget.Holo.Button.Small"
-            app:layout_constraintTop_toTopOf="@+id/view" app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/button4" android:layout_marginRight="16dp"
-            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="@+id/guideline5"
-            android:layout_marginLeft="8dp"/>
-    <Button
-            android:text="Desocupar"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:id="@+id/button4"
-            style="@android:style/Widget.Holo.Button.Small"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
-            app:layout_constraintTop_toTopOf="@+id/view" app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
-    <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                          android:id="@+id/guideline5"
-                                          android:orientation="vertical"
-                                          app:layout_constraintGuide_percent="0.5"/>
+        android:id="@+id/btnDesocupar"
+        style="@android:style/Widget.Holo.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:text="Desocupar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRemover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnRemover"
+        app:layout_constraintTop_toTopOf="@+id/btnRemover" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <TextView
-            android:text="Carreta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carreta"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintBottom_toTopOf="@+id/carro"
-            app:layout_constraintVertical_chainStyle="spread" app:layout_constraintEnd_toStartOf="@+id/carretaOut"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/carreta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Carreta"
+        app:layout_constraintBottom_toTopOf="@+id/carro"
+        app:layout_constraintEnd_toStartOf="@+id/carretaOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_chainStyle="spread" />
+
     <TextView
-            android:text="Carro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carro"
-            app:layout_constraintTop_toBottomOf="@+id/carreta"
-            app:layout_constraintBottom_toTopOf="@+id/moto" app:layout_constraintEnd_toStartOf="@+id/carroOut"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/carro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Carro"
+        app:layout_constraintBottom_toTopOf="@+id/moto"
+        app:layout_constraintEnd_toStartOf="@+id/carroOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carreta" />
+
     <TextView
-            android:text="Moto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/moto"
-            app:layout_constraintTop_toBottomOf="@+id/carro"
-            app:layout_constraintBottom_toTopOf="@+id/van" app:layout_constraintEnd_toStartOf="@+id/motoOut"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
+        android:id="@+id/moto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Moto"
+        app:layout_constraintBottom_toTopOf="@+id/van"
+        app:layout_constraintEnd_toStartOf="@+id/motoOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carro" />
+
     <TextView
-            android:text="Van"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/van"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/moto"
-            app:layout_constraintEnd_toStartOf="@+id/vanOut" android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+        android:id="@+id/van"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Van"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vanOut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moto" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carretaOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintVertical_chainStyle="spread" app:layout_constraintTop_toTopOf="@+id/carreta"
-    />
+        android:id="@+id/carretaOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/carreta"
+        app:layout_constraintVertical_chainStyle="spread" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carroOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintTop_toTopOf="@+id/carro"/>
+        android:id="@+id/carroOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/carro" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/motoOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintTop_toTopOf="@+id/moto"/>
+        android:id="@+id/motoOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/moto" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vanOut" app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            android:layout_marginEnd="32dp" android:layout_marginRight="32dp"
-            app:layout_constraintTop_toTopOf="@+id/van"/>
+        android:id="@+id/vanOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/van" />
+
     <TextView
-            android:text="Disponíveis"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Dispo"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintBottom_toTopOf="@+id/carretaOut"
-            app:layout_constraintStart_toStartOf="@+id/carretaOut"/>
+        android:id="@+id/Dispo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Disponíveis"
+        app:layout_constraintBottom_toTopOf="@+id/carretaOut"
+        app:layout_constraintStart_toStartOf="@+id/carretaOut"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
     <TextView
-            android:text="Ocupados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Ocupado" app:layout_constraintStart_toStartOf="@+id/carretaInd"
-            app:layout_constraintTop_toTopOf="@+id/Dispo"/>
+        android:id="@+id/Ocupado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ocupados"
+        app:layout_constraintStart_toStartOf="@+id/carretaInd"
+        app:layout_constraintTop_toTopOf="@+id/Dispo" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carretaInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
-            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/view" app:layout_constraintBottom_toTopOf="@+id/carroInd"/>
+        android:id="@+id/carretaInd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/carroInd"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/carroInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
-            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/carretaInd"
-            app:layout_constraintBottom_toTopOf="@+id/motoInd"/>
+        android:id="@+id/carroInd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/motoInd"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/carretaInd" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/motoInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
-            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/carroInd"
-            app:layout_constraintBottom_toTopOf="@+id/vanInd"/>
+        android:id="@+id/motoInd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/vanInd"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/carroInd" />
+
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vanInd" app:layout_constraintStart_toStartOf="@+id/guideline5"
-            android:layout_marginLeft="32dp" android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/motoInd"/>
+        android:id="@+id/vanInd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/motoInd" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        app:backgroundTint="#7CB342"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/box_ic"
+        android:focusable="true" />
+
 </android.support.constraint.ConstraintLayout>

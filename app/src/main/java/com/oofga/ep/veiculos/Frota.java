@@ -1,6 +1,6 @@
 package com.oofga.ep.veiculos;//
 
-import com.oofga.ep.entrega.Resposta;
+import com.oofga.ep.utilidade.Resposta;
 
 import java.util.ArrayList;
 
