@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.00999999" />
 
     <Button
-        android:id="@+id/bntAdicionar"
+        android:id="@+id/btnAdicionar"
         style="@android:style/Widget.Holo.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
@@ -57,11 +57,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Remover"
-        app:layout_constraintBottom_toBottomOf="@+id/bntAdicionar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAdicionar"
         app:layout_constraintEnd_toStartOf="@+id/btnDesocupar"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bntAdicionar"
-        app:layout_constraintTop_toTopOf="@+id/bntAdicionar" />
+        app:layout_constraintStart_toEndOf="@+id/btnAdicionar"
+        app:layout_constraintTop_toTopOf="@+id/btnAdicionar" />
 
     <Button
         android:id="@+id/btnDesocupar"

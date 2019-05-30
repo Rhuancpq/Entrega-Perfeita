@@ -24,7 +24,7 @@
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/settingsContainer"
+            android:id="@+id/fragmentContainer"
             android:layout_margin="5dp">
 
     </FrameLayout>

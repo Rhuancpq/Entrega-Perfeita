@@ -1,10 +1,6 @@
 package com.oofga.ep.entregaperfeita;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,18 +8,44 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+
 import com.oofga.ep.veiculos.Frota;
 
-public class MainActivity extends AppCompatActivity implements SettingsFragment.SettingsListener {
+public class MainActivity extends AppCompatActivity implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
     Frota frota = new Frota();
     SettingsFragment settingsFragment;
+    ActionFragment actionFragment;
+    Button btnAdicionar, btnRemover, btnDesocupar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settingsFragment = new SettingsFragment();
+        actionFragment = new ActionFragment();
+        btnAdicionar = findViewById(R.id.btnAdicionar);
+        btnDesocupar = findViewById(R.id.btnDesocupar);
+        btnRemover = findViewById(R.id.btnRemover);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        btnAdicionar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                btnAdicionarListener(v);
+            }
+        });
+
+        btnDesocupar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                btnRemoverListener(v);
+            }
+        });
+
+        btnRemover.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                btnDesocuparListener(v);
+            }
+        });
     }
 
     @Override
@@ -84,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         if (id == R.id.action_settings) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.settingsContainer,settingsFragment);
+            ft.add(R.id.fragmentContainer,settingsFragment);
             ft.addToBackStack(null);
             ft.commit();
             return true;
@@ -101,4 +123,31 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         ft.commit();
     }
 
+    @Override
+    public void onActionButtonClick(String tipo, int Quantidade){
+        //Stuff here
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(actionFragment);
+        ft.commit();
+    }
+    private void attachActionFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragmentContainer,actionFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+    private void btnAdicionarListener(View v){
+        actionFragment.setTipoAcao("Adicionar");
+        attachActionFragment();
+    }
+    private void btnDesocuparListener(View v){
+        actionFragment.setTipoAcao("Desocupar");
+        attachActionFragment();
+    }
+    private void btnRemoverListener(View v){
+        actionFragment.setTipoAcao("Remover");
+        attachActionFragment();
+    }
 }
