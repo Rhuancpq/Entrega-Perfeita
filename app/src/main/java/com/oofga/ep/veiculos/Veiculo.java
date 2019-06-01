@@ -25,6 +25,10 @@ public abstract class Veiculo {
         disponivel = false;
     }
 
+    public void tornaDisponivel(){
+        disponivel = true;
+    }
+
     public boolean naoSuportaCarga(double carga){
         return carga > carga_maxima;
     }

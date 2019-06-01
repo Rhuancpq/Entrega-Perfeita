@@ -9,26 +9,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.oofga.ep.veiculos.Frota;
 
-public class MainActivity extends AppCompatActivity implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
-    Frota frota = new Frota();
+public class MainActivity extends AppCompatActivity
+        implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
+    Frota frota;
     SettingsFragment settingsFragment;
     ActionFragment actionFragment;
     Button btnAdicionar, btnRemover, btnDesocupar;
+    TextView carretaDisp, carroDisp, motoDisp, vanDisp,
+        carretaInd, carroInd, motoInd, vanInd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        frota = new Frota();
         settingsFragment = new SettingsFragment();
         actionFragment = new ActionFragment();
+        setContentView(R.layout.activity_main);
         btnAdicionar = findViewById(R.id.btnAdicionar);
         btnDesocupar = findViewById(R.id.btnDesocupar);
         btnRemover = findViewById(R.id.btnRemover);
-        setContentView(R.layout.activity_main);
+        carretaDisp = findViewById(R.id.carretaDisp);
+        carretaInd = findViewById(R.id.carretaInd);
+        carroDisp = findViewById(R.id.carroDisp);
+        carroInd = findViewById(R.id.carroInd);
+        motoDisp = findViewById(R.id.motoDisp);
+        motoInd = findViewById(R.id.motoInd);
+        vanDisp = findViewById(R.id.vanDisp);
+        vanInd = findViewById(R.id.vanInd);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnAdicionarListener(v);
@@ -51,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     @Override
     protected void onStart(){
         super.onStart();
+        atualizarInformacoes();
     }
 
     @Override
@@ -120,17 +133,21 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);
+        getSupportFragmentManager().popBackStack();
         ft.commit();
     }
 
     @Override
-    public void onActionButtonClick(String tipo, int Quantidade){
-        //Stuff here
+    public void onActionButtonClick(String tipo, int Quantidade, String tipoAcao){
+
+        //Removendo o Fragmento da exibição
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(actionFragment);
+        getSupportFragmentManager().popBackStack();
         ft.commit();
     }
+
     private void attachActionFragment(){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -149,5 +166,16 @@ public class MainActivity extends AppCompatActivity implements SettingsFragment.
     private void btnRemoverListener(View v){
         actionFragment.setTipoAcao("Remover");
         attachActionFragment();
+    }
+
+    private void atualizarInformacoes(){
+        carretaDisp.setText(String.valueOf(frota.getQntCarretasDisp()));
+        carroDisp.setText(String.valueOf(frota.getQntCarrosDisp()));
+        motoDisp.setText(String.valueOf(frota.getQntMotosDisp()));
+        vanDisp.setText(String.valueOf(frota.getQntVansDisp()));
+        carretaInd.setText(String.valueOf(frota.getCarretasOcupadas()));
+        carroInd.setText(String.valueOf(frota.getCarrosOcupados()));
+        motoInd.setText(String.valueOf(frota.getMotosOcupadas()));
+        vanInd.setText(String.valueOf(frota.getVansOcupadas()));
     }
 }

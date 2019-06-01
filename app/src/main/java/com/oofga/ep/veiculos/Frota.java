@@ -3,32 +3,156 @@ package com.oofga.ep.veiculos;//
 import com.oofga.ep.utilidade.Resposta;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // Created by rhuan on 17/05/19.
 // ep2
 //
 public class Frota {
     private ArrayList<Veiculo> lista = new ArrayList<>();
+    private int qntCarretas = 0, qntCarros = 0, qntMotos = 0, qntVans = 0, carretasOcupadas = 0,
+            carrosOcupados = 0, motosOcupadas = 0, vansOcupadas = 0;
 
-    public void adicionarVeiculo(Veiculo temp) {
-        lista.add(temp);
+    public int getCarretasOcupadas() {
+        return carretasOcupadas;
     }
 
-    public void removerVeiculo(int index) {
-        lista.remove(index);
+    public int getCarrosOcupados() {
+        return carrosOcupados;
+    }
+
+    public int getMotosOcupadas() {
+        return motosOcupadas;
+    }
+
+    public int getVansOcupadas() {
+        return vansOcupadas;
+    }
+
+    public int getQntCarretas() {
+        return qntCarretas;
+    }
+
+    public int getQntCarros() {
+        return qntCarros;
+    }
+
+    public int getQntMotos() {
+        return qntMotos;
+    }
+
+    public int getQntVans() {
+        return qntVans;
+    }
+
+    public int getQntCarretasDisp() {
+        return qntCarretas - carretasOcupadas;
+    }
+
+    public int getQntCarrosDisp() {
+        return qntCarros - carrosOcupados;
+    }
+
+    public int getQntMotosDisp() {
+        return qntMotos - motosOcupadas;
+    }
+
+    public int getQntVansDisp() {
+        return qntVans - vansOcupadas;
+    }
+
+    public void adicionarVeiculos(String tipo, int quantidade) {
+        if (tipo.equals("Carreta")) {
+            for (int i = 0; i < quantidade; i++) {
+                lista.add(new Carreta());
+                qntCarretas++;
+            }
+        } else if (tipo.equals("Carro")) {
+            for (int i = 0; i < quantidade; i++) {
+                lista.add(new Carro());
+                qntCarros++;
+            }
+        } else if (tipo.equals("Moto")) {
+            for (int i = 0; i < quantidade; i++) {
+                lista.add(new Moto());
+                qntMotos++;
+            }
+        } else if (tipo.equals("Van")) {
+            for (int i = 0; i < quantidade; i++) {
+                lista.add(new Van());
+                qntVans++;
+            }
+        } else {
+
+        }
+    }
+
+    public void removerVeiculos(String tipo, int quantidade) {
+        for (int i = 0; i < quantidade; i++) {
+            Iterator itr = lista.iterator();
+            while (itr.hasNext()) {
+                Veiculo x = (Veiculo) itr.next();
+                if (x.getTipo().equals(tipo)) {
+                    itr.remove();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void desocuparVeiculos(String tipo, int quantidade) {
+        for (int i = 0; i < quantidade; i++) {
+            for (Veiculo x : lista) {
+                if (x.getTipo().equals(tipo) && !(x.estaDisponivel())) {
+                    switch (tipo) {
+                        case "Carreta":
+                            carretasOcupadas--;
+                            break;
+                        case "Carro":
+                            carrosOcupados--;
+                            break;
+                        case "Moto":
+                            motosOcupadas--;
+                            break;
+                        case "Van":
+                            vansOcupadas--;
+                            break;
+                    }
+                    x.tornaDisponivel();
+                    break;
+                }
+            }
+        }
     }
 
     public void ocuparVeiculo(String tipo) {
         for (Veiculo x : lista) {
             if (x.getTipo().equals(tipo) && x.estaDisponivel()) {
+                switch (tipo) {
+                    case "Carreta":
+                        carretasOcupadas++;
+                        break;
+                    case "Carro":
+                        carrosOcupados++;
+                        break;
+                    case "Moto":
+                        motosOcupadas++;
+                        break;
+                    case "Van":
+                        vansOcupadas++;
+                        break;
+                }
                 x.tornaIndisponivel();
                 break;
             }
         }
     }
 
-    public Veiculo getVeiculo(int index) {
-        return lista.get(index);
+    private double lucro(double val, double percent) {
+        if (percent >= 1) {
+            throw new ClassCastException(" Margem de Lucro não suportada");
+        }
+        return val / (1 - percent);
     }
 
     private double calculaCusto(Veiculo x, double distancia, double carga) {
@@ -73,7 +197,7 @@ public class Frota {
         if (tipo_veiculo.isEmpty()) {
             return new Resposta(false, tipo_veiculo, tempo, menorCusto);
         } else {
-            return new Resposta(true, tipo_veiculo, tempo, menorCusto * margemLucro);
+            return new Resposta(true, tipo_veiculo, tempo, lucro(menorCusto,margemLucro));
         }
     }
 
@@ -104,7 +228,7 @@ public class Frota {
         if (tipoVeiculo.isEmpty()) {
             return new Resposta(false, tipoVeiculo, menorTempo, custo);
         } else {
-            return new Resposta(true, tipoVeiculo, menorTempo, custo * margemLucro);
+            return new Resposta(true, tipoVeiculo, menorTempo, lucro(custo,margemLucro));
         }
     }
 
@@ -136,7 +260,7 @@ public class Frota {
         if (tipoVeiculo.isEmpty()) {
             return new Resposta(false, tipoVeiculo, menorTempo, menorCusto);
         } else {
-            return new Resposta(true, tipoVeiculo, menorTempo, menorCusto * margemLucro);
+            return new Resposta(true, tipoVeiculo, menorTempo, lucro(menorCusto,margemLucro));
         }
     }
 }

@@ -15,7 +15,7 @@ import android.widget.Spinner;
 public class ActionFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Spinner spinner;
     private Button btnAction;
-    private String tipoSelecionado,tipoAcao;
+    private String tipoSelecionado, tipoAcao;
     private EditText inQuantidade;
 
     public void setTipoAcao(String tipoAcao){
@@ -24,7 +24,7 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
 
     ActionListener activityCallback;
     public interface ActionListener{
-        public void onActionButtonClick(String tipo, int Quantidade);
+        public void onActionButtonClick(String tipo, int Quantidade, String acao);
     }
 
     @Override
@@ -52,6 +52,7 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
         spinner.setAdapter(adapter);
         //Button
         btnAction.setText(tipoAcao);
+        btnAction.setVisibility(Button.VISIBLE);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 actionButtonClicked(v);
@@ -73,7 +74,8 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
 
     public void actionButtonClicked(View view){
         try {
-            activityCallback.onActionButtonClick(tipoSelecionado, Integer.parseInt((inQuantidade.getText().toString())));
+            activityCallback.onActionButtonClick(tipoSelecionado,
+                    Integer.parseInt((inQuantidade.getText().toString())),tipoAcao);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

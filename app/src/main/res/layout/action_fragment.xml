@@ -7,12 +7,14 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="414dp"
-        android:layout_height="676dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#E1F5FE"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view4"
@@ -76,7 +78,8 @@
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintHorizontal_bias="0.67"
         app:layout_constraintStart_toEndOf="@+id/txtQuantidade"
-        app:layout_constraintTop_toTopOf="@+id/txtQuantidade" />
+        app:layout_constraintTop_toTopOf="@+id/txtQuantidade"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnAction"
@@ -89,6 +92,7 @@
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toBottomOf="@+id/inQuantidade"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="invisible" />
 
 </android.support.constraint.ConstraintLayout>
