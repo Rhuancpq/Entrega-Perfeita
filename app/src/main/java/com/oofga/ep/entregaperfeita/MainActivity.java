@@ -1,6 +1,7 @@
 package com.oofga.ep.entregaperfeita;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oofga.ep.veiculos.Frota;
 
@@ -19,8 +22,11 @@ public class MainActivity extends AppCompatActivity
     SettingsFragment settingsFragment;
     ActionFragment actionFragment;
     Button btnAdicionar, btnRemover, btnDesocupar;
+    FloatingActionButton entrega;
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
-        carretaInd, carroInd, motoInd, vanInd;
+            carretaInd, carroInd, motoInd, vanInd,
+            carreta, carro, moto, van, Dispo, Ocupado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,13 @@ public class MainActivity extends AppCompatActivity
         motoInd = findViewById(R.id.motoInd);
         vanDisp = findViewById(R.id.vanDisp);
         vanInd = findViewById(R.id.vanInd);
+        carreta = findViewById(R.id.carreta);
+        carro = findViewById(R.id.carro);
+        moto = findViewById(R.id.moto);
+        van = findViewById(R.id.van);
+        Dispo = findViewById(R.id.Dispo);
+        Ocupado = findViewById(R.id.Ocupado);
+        entrega = findViewById(R.id.entrega);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
@@ -61,18 +74,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         atualizarInformacoes();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
     }
 
@@ -82,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
     }
 
@@ -119,7 +132,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragmentContainer,settingsFragment);
+            ft.add(R.id.fragmentContainer, settingsFragment);
             ft.addToBackStack(null);
             ft.commit();
             return true;
@@ -129,7 +142,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onButtonClick(){
+    public void onButtonClick() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);
@@ -137,9 +150,63 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    @Override
-    public void onActionButtonClick(String tipo, int Quantidade, String tipoAcao){
+    private boolean verificarOcupadas(String tipo, int quantidade) {
+        switch (tipo) {
+            case "Carreta":
+                return frota.getCarretasOcupadas() >= quantidade;
+            case "Carro":
+                return frota.getCarrosOcupados() >= quantidade;
+            case "Moto":
+                return frota.getMotosOcupadas() >= quantidade;
+            case "Van":
+                return frota.getVansOcupadas() >= quantidade;
+            default:
+                return false;
 
+        }
+    }
+
+    private boolean verificarVeiculos(String tipo, int quantidade) {
+        switch (tipo) {
+            case "Carreta":
+                return frota.getQntCarretasDisp() >= quantidade;
+            case "Carro":
+                return frota.getQntCarrosDisp() >= quantidade;
+            case "Moto":
+                return frota.getQntMotosDisp() >= quantidade;
+            case "Van":
+                return frota.getQntVansDisp() >= quantidade;
+            default:
+                return false;
+
+        }
+    }
+
+    @Override
+    public void onActionButtonClick(String tipo, int quantidade, String tipoAcao) {
+        switch (tipoAcao) {
+            case "Adicionar":
+                frota.adicionarVeiculos(tipo, quantidade);
+                break;
+            case "Desocupar":
+                if (verificarOcupadas(tipo, quantidade)) {
+                    frota.desocuparVeiculos(tipo,quantidade);
+                }else{
+                    String text = "Quantidade de ocupados é menor do que a quantidade que deseja desocupar";
+                    Toast toast = Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                break;
+            case "Remover":
+                if (verificarVeiculos(tipo, quantidade)) {
+                    frota.removerVeiculos(tipo,quantidade);
+                }else{
+                    String text = "Quantidade disponivel é menor do que a quantidade que deseja remover";
+                    Toast toast = Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                break;
+        }
         //Removendo o Fragmento da exibição
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -148,34 +215,68 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private void attachActionFragment(){
+    private void attachActionFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragmentContainer,actionFragment);
+        ft.add(R.id.fragmentContainer, actionFragment);
         ft.addToBackStack(null);
         ft.commit();
     }
-    private void btnAdicionarListener(View v){
+
+    private void btnAdicionarListener(View v) {
         actionFragment.setTipoAcao("Adicionar");
         attachActionFragment();
     }
-    private void btnDesocuparListener(View v){
+
+    private void btnDesocuparListener(View v) {
         actionFragment.setTipoAcao("Desocupar");
         attachActionFragment();
     }
-    private void btnRemoverListener(View v){
+
+    private void btnRemoverListener(View v) {
         actionFragment.setTipoAcao("Remover");
         attachActionFragment();
     }
 
-    private void atualizarInformacoes(){
-        carretaDisp.setText(String.valueOf(frota.getQntCarretasDisp()));
-        carroDisp.setText(String.valueOf(frota.getQntCarrosDisp()));
-        motoDisp.setText(String.valueOf(frota.getQntMotosDisp()));
-        vanDisp.setText(String.valueOf(frota.getQntVansDisp()));
-        carretaInd.setText(String.valueOf(frota.getCarretasOcupadas()));
-        carroInd.setText(String.valueOf(frota.getCarrosOcupados()));
-        motoInd.setText(String.valueOf(frota.getMotosOcupadas()));
-        vanInd.setText(String.valueOf(frota.getVansOcupadas()));
+    private void atualizarInformacoes() {
+        if(frota.getLista().isEmpty()){
+            carretaDisp.setVisibility(EditText.INVISIBLE);
+            carretaInd.setVisibility(EditText.INVISIBLE);
+            carroDisp.setVisibility(EditText.INVISIBLE);
+            carroInd.setVisibility(EditText.INVISIBLE);
+            motoDisp.setVisibility(EditText.INVISIBLE);
+            motoInd.setVisibility(EditText.INVISIBLE);
+            vanDisp.setVisibility(EditText.INVISIBLE);
+            vanInd.setVisibility(EditText.INVISIBLE);
+            carreta.setVisibility(EditText.INVISIBLE);
+            carro.setVisibility(EditText.INVISIBLE);
+            moto.setVisibility(EditText.INVISIBLE);
+            van.setVisibility(EditText.INVISIBLE);
+            Dispo.setVisibility(EditText.INVISIBLE);
+            Ocupado.setVisibility(EditText.INVISIBLE);
+        }else {
+            carretaDisp.setVisibility(EditText.VISIBLE);
+            carretaInd.setVisibility(EditText.VISIBLE);
+            carroDisp.setVisibility(EditText.VISIBLE);
+            carroInd.setVisibility(EditText.VISIBLE);
+            motoDisp.setVisibility(EditText.VISIBLE);
+            motoInd.setVisibility(EditText.VISIBLE);
+            vanDisp.setVisibility(EditText.VISIBLE);
+            vanInd.setVisibility(EditText.VISIBLE);
+            carreta.setVisibility(EditText.VISIBLE);
+            carro.setVisibility(EditText.VISIBLE);
+            moto.setVisibility(EditText.VISIBLE);
+            van.setVisibility(EditText.VISIBLE);
+            Dispo.setVisibility(EditText.VISIBLE);
+            Ocupado.setVisibility(EditText.VISIBLE);
+            carretaDisp.setText(String.valueOf(frota.getQntCarretasDisp()));
+            carroDisp.setText(String.valueOf(frota.getQntCarrosDisp()));
+            motoDisp.setText(String.valueOf(frota.getQntMotosDisp()));
+            vanDisp.setText(String.valueOf(frota.getQntVansDisp()));
+            carretaInd.setText(String.valueOf(frota.getCarretasOcupadas()));
+            carroInd.setText(String.valueOf(frota.getCarrosOcupados()));
+            motoInd.setText(String.valueOf(frota.getMotosOcupadas()));
+            vanInd.setText(String.valueOf(frota.getVansOcupadas()));
+        }
     }
 }

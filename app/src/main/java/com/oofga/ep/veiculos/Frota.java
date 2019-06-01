@@ -61,6 +61,10 @@ public class Frota {
         return qntVans - vansOcupadas;
     }
 
+    public ArrayList<Veiculo> getLista() {
+        return lista;
+    }
+
     public void adicionarVeiculos(String tipo, int quantidade) {
         if (tipo.equals("Carreta")) {
             for (int i = 0; i < quantidade; i++) {
@@ -92,7 +96,21 @@ public class Frota {
             Iterator itr = lista.iterator();
             while (itr.hasNext()) {
                 Veiculo x = (Veiculo) itr.next();
-                if (x.getTipo().equals(tipo)) {
+                if (x.getTipo().equals(tipo) && x.estaDisponivel()) {
+                    switch (tipo) {
+                        case "Carreta":
+                            qntCarretas--;
+                            break;
+                        case "Carro":
+                            qntCarros--;
+                            break;
+                        case "Moto":
+                            qntMotos--;
+                            break;
+                        case "Van":
+                            qntVans--;
+                            break;
+                    }
                     itr.remove();
                     break;
                 }
