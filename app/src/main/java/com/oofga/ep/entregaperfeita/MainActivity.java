@@ -20,19 +20,19 @@ public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
     Frota frota;
     SettingsFragment settingsFragment;
-    ActionFragment actionFragment;
+    ActionFragment atualActionFragment;
     Button btnAdicionar, btnRemover, btnDesocupar;
     FloatingActionButton entrega;
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
+    double margemLucro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         frota = new Frota();
         settingsFragment = new SettingsFragment();
-        actionFragment = new ActionFragment();
         setContentView(R.layout.activity_main);
         btnAdicionar = findViewById(R.id.btnAdicionar);
         btnDesocupar = findViewById(R.id.btnDesocupar);
@@ -62,13 +62,13 @@ public class MainActivity extends AppCompatActivity
 
         btnDesocupar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                btnRemoverListener(v);
+                btnDesocuparListener(v);
             }
         });
 
         btnRemover.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                btnDesocuparListener(v);
+                btnRemoverListener(v);
             }
         });
     }
@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onButtonClick() {
+    public void onSettingsButtonClick(double margem) {
+        margemLucro = margem;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private boolean verificarOcupadas(String tipo, int quantidade) {
+    private boolean verificarOcupados(String tipo, int quantidade) {
         switch (tipo) {
             case "Carreta":
                 return frota.getCarretasOcupadas() >= quantidade;
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                 frota.adicionarVeiculos(tipo, quantidade);
                 break;
             case "Desocupar":
-                if (verificarOcupadas(tipo, quantidade)) {
+                if (verificarOcupados(tipo, quantidade)) {
                     frota.desocuparVeiculos(tipo,quantidade);
                 }else{
                     String text = "Quantidade de ocupados é menor do que a quantidade que deseja desocupar";
@@ -210,32 +211,35 @@ public class MainActivity extends AppCompatActivity
         //Removendo o Fragmento da exibição
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(actionFragment);
+        ft.remove(atualActionFragment);
         getSupportFragmentManager().popBackStack();
         ft.commit();
     }
 
-    private void attachActionFragment() {
+    private void attachActionFragment(ActionFragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragmentContainer, actionFragment);
+        ft.add(R.id.fragmentContainer, f);
         ft.addToBackStack(null);
         ft.commit();
     }
 
     private void btnAdicionarListener(View v) {
-        actionFragment.setTipoAcao("Adicionar");
-        attachActionFragment();
+        atualActionFragment = new ActionFragment();
+        atualActionFragment.setTipoAcao("Adicionar");
+        attachActionFragment(atualActionFragment);
     }
 
     private void btnDesocuparListener(View v) {
-        actionFragment.setTipoAcao("Desocupar");
-        attachActionFragment();
+        atualActionFragment = new ActionFragment();
+        atualActionFragment.setTipoAcao("Desocupar");
+        attachActionFragment(atualActionFragment);
     }
 
     private void btnRemoverListener(View v) {
-        actionFragment.setTipoAcao("Remover");
-        attachActionFragment();
+        atualActionFragment = new ActionFragment();
+        atualActionFragment.setTipoAcao("Remover");
+        attachActionFragment(atualActionFragment);
     }
 
     private void atualizarInformacoes() {

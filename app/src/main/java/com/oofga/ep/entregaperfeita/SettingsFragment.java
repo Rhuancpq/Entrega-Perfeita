@@ -13,10 +13,10 @@ import android.widget.EditText;
 // ep2
 //
 public class SettingsFragment extends Fragment {
-
+    EditText inMargem;
     SettingsListener activityCallback;
     public interface SettingsListener {
-        public void onButtonClick();
+        public void onSettingsButtonClick(double margem);
     }
     @Override
     public void onAttach(Context context) {
@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.settings_fragment, container,false);
+        inMargem = view.findViewById(R.id.inMargem);
         final Button button =
                 (Button) view.findViewById(R.id.buttonOk);
         button.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +45,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void buttonClicked (View view) {
-        activityCallback.onButtonClick();
+        activityCallback.onSettingsButtonClick(Double.parseDouble(inMargem.getText().toString()));
     }
 
 

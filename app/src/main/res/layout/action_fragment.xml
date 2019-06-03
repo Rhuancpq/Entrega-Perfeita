@@ -18,8 +18,8 @@
 
     <View
         android:id="@+id/view4"
-        android:layout_width="319dp"
-        android:layout_height="170dp"
+        android:layout_width="318dp"
+        android:layout_height="194dp"
         android:background="@android:color/holo_blue_dark"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,17 +69,17 @@
 
     <EditText
         android:id="@+id/inQuantidade"
-        android:layout_width="104dp"
-        android:layout_height="32dp"
+        android:layout_width="106dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtQuantidade"
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toEndOf="@+id/txtQuantidade"
-        app:layout_constraintTop_toTopOf="@+id/txtQuantidade"
-        android:importantForAutofill="no" />
+        app:layout_constraintStart_toEndOf="@+id/txtQuantidade" />
 
     <Button
         android:id="@+id/btnAction"
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintStart_toStartOf="@+id/view4"
         app:layout_constraintTop_toBottomOf="@+id/inQuantidade"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         tools:visibility="invisible" />
 
 </android.support.constraint.ConstraintLayout>

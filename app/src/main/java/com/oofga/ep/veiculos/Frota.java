@@ -168,7 +168,7 @@ public class Frota {
 
     private double lucro(double val, double percent) {
         if (percent >= 1) {
-            throw new ClassCastException(" Margem de Lucro não suportada");
+            throw new ClassCastException("Margem de Lucro não suportada");
         }
         return val / (1 - percent);
     }

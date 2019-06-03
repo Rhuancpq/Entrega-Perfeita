@@ -52,10 +52,22 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
         spinner.setAdapter(adapter);
         //Button
         btnAction.setText(tipoAcao);
-        btnAction.setVisibility(Button.VISIBLE);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 actionButtonClicked(v);
+            }
+        });
+        //EditText
+        inQuantidade.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    if(inQuantidade.getText().toString().isEmpty()){
+                        btnAction.setVisibility(Button.GONE);
+                    }else{
+                        btnAction.setVisibility(Button.VISIBLE);
+                    }
+                }
             }
         });
         return view;
