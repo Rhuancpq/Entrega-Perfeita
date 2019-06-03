@@ -213,6 +213,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(atualActionFragment);
         getSupportFragmentManager().popBackStack();
+        atualizarInformacoes();
         ft.commit();
     }
 

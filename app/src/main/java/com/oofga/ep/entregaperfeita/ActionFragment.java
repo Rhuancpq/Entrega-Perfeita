@@ -11,24 +11,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-public class ActionFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ActionFragment extends Fragment {
     private Spinner spinner;
     private Button btnAction;
     private String tipoSelecionado, tipoAcao;
     private EditText inQuantidade;
 
-    public void setTipoAcao(String tipoAcao){
+    public void setTipoAcao(String tipoAcao) {
         this.tipoAcao = tipoAcao;
     }
 
     ActionListener activityCallback;
-    public interface ActionListener{
+
+    public interface ActionListener {
         public void onActionButtonClick(String tipo, int Quantidade, String acao);
     }
 
     @Override
-    public void onAttach(Context context){
+    public void onAttach(Context context) {
         super.onAttach(context);
         try {
             activityCallback = (ActionListener) context;
@@ -39,17 +41,33 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.action_fragment, container,false);
+        View view = inflater.inflate(R.layout.action_fragment, container, false);
         spinner = view.findViewById(R.id.spinnerTipo);
         btnAction = view.findViewById(R.id.btnAction);
         inQuantidade = view.findViewById(R.id.inQuantidade);
         //Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
-                R.array.veiculos,android.R.layout.simple_spinner_item);
+                R.array.veiculos, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+                tipoSelecionado = (String) parent.getItemAtPosition(pos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView parent) {
+                tipoSelecionado = "Carreta";
+                String text = "Nenhum tipo selecionado, Carreta selecionada por padrão";
+                Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+        });
         //Button
         btnAction.setText(tipoAcao);
         btnAction.setOnClickListener(new View.OnClickListener() {
@@ -61,10 +79,10 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
         inQuantidade.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus){
-                    if(inQuantidade.getText().toString().isEmpty()){
+                if (!hasFocus) {
+                    if (inQuantidade.getText().toString().isEmpty()) {
                         btnAction.setVisibility(Button.GONE);
-                    }else{
+                    } else {
                         btnAction.setVisibility(Button.VISIBLE);
                     }
                 }
@@ -73,21 +91,10 @@ public class ActionFragment extends Fragment implements AdapterView.OnItemSelect
         return view;
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        tipoSelecionado = (String) parent.getItemAtPosition(pos);
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-        tipoSelecionado = "Carreta";
-    }
-
-    public void actionButtonClicked(View view){
+    public void actionButtonClicked(View view) {
         try {
             activityCallback.onActionButtonClick(tipoSelecionado,
-                    Integer.parseInt((inQuantidade.getText().toString())),tipoAcao);
+                    Integer.parseInt((inQuantidade.getText().toString())), tipoAcao);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
