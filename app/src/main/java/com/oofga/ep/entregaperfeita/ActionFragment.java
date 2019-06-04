@@ -3,6 +3,8 @@ package com.oofga.ep.entregaperfeita;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,16 +78,25 @@ public class ActionFragment extends Fragment {
             }
         });
         //EditText
-        inQuantidade.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        inQuantidade.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    if (inQuantidade.getText().toString().isEmpty()) {
-                        btnAction.setVisibility(Button.GONE);
-                    } else {
-                        btnAction.setVisibility(Button.VISIBLE);
-                    }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (inQuantidade.getText().toString().isEmpty() ||
+                        Integer.parseInt(inQuantidade.getText().toString()) == 0) {
+                    btnAction.setVisibility(Button.GONE);
+                } else {
+                    btnAction.setVisibility(Button.VISIBLE);
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         return view;

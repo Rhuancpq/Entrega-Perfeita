@@ -190,7 +190,7 @@ public class Frota {
 
     public Resposta veiculoMenorCusto(double carga, double distancia, double tempoMax, double margemLucro) {
         double menorCusto = 0;
-        String tipo_veiculo = "";
+        String tipoVeiculo = "";
         double tempo = 0;
         for (Veiculo x : lista) {
             if (x.naoSuportaCarga(carga)) {
@@ -199,23 +199,24 @@ public class Frota {
             if (x.calculaTempo(distancia) > tempoMax) {
                 continue;
             }
-            if (tipo_veiculo.isEmpty()) {
+            if(x.getTipo().equals(tipoVeiculo)) continue;
+            if (tipoVeiculo.isEmpty()) {
                 menorCusto = calculaCusto(x, distancia, carga);
-                tipo_veiculo = x.getTipo();
+                tipoVeiculo = x.getTipo();
                 tempo = x.calculaTempo(distancia);
             } else {
                 double custoTemp = calculaCusto(x, distancia, carga);
                 if (custoTemp <= menorCusto) {
                     menorCusto = custoTemp;
-                    tipo_veiculo = x.getTipo();
+                    tipoVeiculo = x.getTipo();
                     tempo = x.calculaTempo(distancia);
                 }
             }
         }
-        if (tipo_veiculo.isEmpty()) {
-            return new Resposta(false, tipo_veiculo, tempo, menorCusto);
+        if (tipoVeiculo.isEmpty()) {
+            return new Resposta(false, tipoVeiculo, tempo, menorCusto);
         } else {
-            return new Resposta(true, tipo_veiculo, tempo, lucro(menorCusto,margemLucro));
+            return new Resposta(true, tipoVeiculo, tempo, lucro(menorCusto,margemLucro));
         }
     }
 
@@ -230,6 +231,7 @@ public class Frota {
             if (x.calculaTempo(distancia) > tempoMax) {
                 continue;
             }
+            if(x.getTipo().equals(tipoVeiculo)) continue;
             if (tipoVeiculo.isEmpty()) {
                 menorTempo = x.calculaTempo(distancia);
                 tipoVeiculo = x.getTipo();
@@ -261,6 +263,7 @@ public class Frota {
             if (x.calculaTempo(distancia) > tempoMax) {
                 continue;
             }
+            if(x.getTipo().equals(tipoVeiculo)) continue;
             if (tipoVeiculo.isEmpty()) {
                 menorTempo = x.calculaTempo(distancia);
                 tipoVeiculo = x.getTipo();
