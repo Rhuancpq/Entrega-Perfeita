@@ -14,11 +14,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.oofga.ep.utilidade.Frete;
 import com.oofga.ep.veiculos.Frota;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
     Frota frota;
+    private ArrayList<Frete> fretes;
     SettingsFragment settingsFragment;
     ActionFragment atualActionFragment;
     Button btnAdicionar, btnRemover, btnDesocupar;
@@ -32,10 +36,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         frota = new Frota();
+        fretes = new ArrayList<>();
         settingsFragment = new SettingsFragment();
         setContentView(R.layout.activity_main);
         btnAdicionar = findViewById(R.id.btnAdicionar);
-        btnDesocupar = findViewById(R.id.btnDesocupar);
         btnRemover = findViewById(R.id.btnRemover);
         carretaDisp = findViewById(R.id.carretaDisp);
         carretaInd = findViewById(R.id.carretaInd);
@@ -57,12 +61,6 @@ public class MainActivity extends AppCompatActivity
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnAdicionarListener(v);
-            }
-        });
-
-        btnDesocupar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                btnDesocuparListener(v);
             }
         });
 
@@ -189,15 +187,6 @@ public class MainActivity extends AppCompatActivity
             case "Adicionar":
                 frota.adicionarVeiculos(tipo, quantidade);
                 break;
-            case "Desocupar":
-                if (verificarOcupados(tipo, quantidade)) {
-                    frota.desocuparVeiculos(tipo,quantidade);
-                }else{
-                    String text = "Quantidade de ocupados é menor do que a quantidade que deseja desocupar";
-                    Toast toast = Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                break;
             case "Remover":
                 if (verificarVeiculos(tipo, quantidade)) {
                     frota.removerVeiculos(tipo,quantidade);
@@ -228,12 +217,6 @@ public class MainActivity extends AppCompatActivity
     private void btnAdicionarListener(View v) {
         atualActionFragment = new ActionFragment();
         atualActionFragment.setTipoAcao("Adicionar");
-        attachActionFragment(atualActionFragment);
-    }
-
-    private void btnDesocuparListener(View v) {
-        atualActionFragment = new ActionFragment();
-        atualActionFragment.setTipoAcao("Desocupar");
         attachActionFragment(atualActionFragment);
     }
 

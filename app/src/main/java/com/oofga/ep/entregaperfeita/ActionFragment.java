@@ -86,11 +86,14 @@ public class ActionFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (inQuantidade.getText().toString().isEmpty() ||
-                        Integer.parseInt(inQuantidade.getText().toString()) == 0) {
-                    btnAction.setVisibility(Button.GONE);
+                if (!inQuantidade.getText().toString().isEmpty()) {
+                    if (Integer.parseInt(inQuantidade.getText().toString()) == 0) {
+                        btnAction.setVisibility(Button.GONE);
+                    }else {
+                        btnAction.setVisibility(Button.VISIBLE);
+                    }
                 } else {
-                    btnAction.setVisibility(Button.VISIBLE);
+                    btnAction.setVisibility(Button.GONE);
                 }
             }
 
@@ -107,7 +110,9 @@ public class ActionFragment extends Fragment {
             activityCallback.onActionButtonClick(tipoSelecionado,
                     Integer.parseInt((inQuantidade.getText().toString())), tipoAcao);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            String text = "Quantidade muito alta!!";
+            Toast toast = Toast.makeText(getActivity(),text, Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 }
