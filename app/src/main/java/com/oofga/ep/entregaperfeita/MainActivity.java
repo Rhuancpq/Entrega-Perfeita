@@ -16,13 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oofga.ep.utilidade.Frete;
+import com.oofga.ep.utilidade.Resposta;
 import com.oofga.ep.veiculos.Frota;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
-        RegisterFragment.RegisterListener {
+        RegisterFragment.RegisterListener, SelectionFragment.SelectionListener {
     Frota frota;
     private ArrayList<Frete> fretes;
     SettingsFragment settingsFragment;
@@ -219,6 +220,12 @@ public class MainActivity extends AppCompatActivity
         atualActionFragment.setTipoAcao("Remover");
         attachFragment(atualActionFragment);
     }
+
+    @Override
+    public void onBtnVeiculoClick(Resposta resposta){
+        // do nothing
+    }
+
 
     @Override
     public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax){

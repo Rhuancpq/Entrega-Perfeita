@@ -22,8 +22,8 @@
         android:id="@+id/nomeFrete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="Nome do frete:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBaseline_toBaselineOf="@+id/inNome"
@@ -33,8 +33,8 @@
         android:id="@+id/Distancia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="Distância:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBaseline_toBaselineOf="@+id/inDistancia"
@@ -44,8 +44,8 @@
         android:id="@+id/Carga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="Carga:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBaseline_toBaselineOf="@+id/inCarga"
@@ -55,24 +55,28 @@
         android:id="@+id/cadastroTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Cadastre a encomenda:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#00143A"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <EditText
         android:id="@+id/inNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toStartOf="@+id/unidadeKm"
+        app:layout_constraintStart_toEndOf="@+id/nomeFrete"
         app:layout_constraintTop_toBottomOf="@+id/cadastroTitulo" />
 
     <EditText
@@ -134,8 +138,8 @@
         android:id="@+id/tempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="Tempo Máximo:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBaseline_toBaselineOf="@+id/inTempo"
@@ -143,14 +147,16 @@
 
     <EditText
         android:id="@+id/inTempo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/unidadeH"
-        app:layout_constraintStart_toStartOf="@+id/inNome" />
+        app:layout_constraintStart_toEndOf="@+id/tempo" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

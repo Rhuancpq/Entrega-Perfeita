@@ -42,7 +42,6 @@ public class RegisterFragment extends Fragment {
         inDistancia = view.findViewById(R.id.inDistancia);
         inTempo = view.findViewById(R.id.inTempo);
         inCarga = view.findViewById(R.id.inCarga);
-
         inCarga.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -51,8 +50,13 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!inCarga.getText().toString().isEmpty()) {
-                    if (Double.parseDouble(inCarga.getText().toString()) == 0d) {
+                if (!inCarga.getText().toString().isEmpty() &&
+                        !inTempo.getText().toString().isEmpty() &&
+                        !inDistancia.getText().toString().isEmpty() &&
+                        !inNome.getText().toString().isEmpty()) {
+                    if (Double.parseDouble(inCarga.getText().toString()) == 0d ||
+                            Double.parseDouble(inTempo.getText().toString()) == 0d ||
+                            Double.parseDouble(inDistancia.getText().toString()) == 0d) {
                         btnEncomenda.setVisibility(Button.GONE);
                     } else {
                         btnEncomenda.setVisibility(Button.VISIBLE);
@@ -76,8 +80,13 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!inTempo.getText().toString().isEmpty()) {
-                    if (Double.parseDouble(inTempo.getText().toString()) == 0d) {
+                if (!inCarga.getText().toString().isEmpty() &&
+                        !inTempo.getText().toString().isEmpty() &&
+                        !inDistancia.getText().toString().isEmpty() &&
+                        !inNome.getText().toString().isEmpty()) {
+                    if (Double.parseDouble(inCarga.getText().toString()) == 0d ||
+                            Double.parseDouble(inTempo.getText().toString()) == 0d ||
+                            Double.parseDouble(inDistancia.getText().toString()) == 0d) {
                         btnEncomenda.setVisibility(Button.GONE);
                     } else {
                         btnEncomenda.setVisibility(Button.VISIBLE);
@@ -101,8 +110,13 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!inDistancia.getText().toString().isEmpty()) {
-                    if (Double.parseDouble(inDistancia.getText().toString()) == 0d) {
+                if (!inCarga.getText().toString().isEmpty() &&
+                        !inTempo.getText().toString().isEmpty() &&
+                        !inDistancia.getText().toString().isEmpty() &&
+                        !inNome.getText().toString().isEmpty()) {
+                    if (Double.parseDouble(inCarga.getText().toString()) == 0d ||
+                            Double.parseDouble(inTempo.getText().toString()) == 0d ||
+                            Double.parseDouble(inDistancia.getText().toString()) == 0d) {
                         btnEncomenda.setVisibility(Button.GONE);
                     } else {
                         btnEncomenda.setVisibility(Button.VISIBLE);
@@ -126,8 +140,17 @@ public class RegisterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!inNome.getText().toString().isEmpty()) {
-                    btnEncomenda.setVisibility(Button.VISIBLE);
+                if (!inCarga.getText().toString().isEmpty() &&
+                        !inTempo.getText().toString().isEmpty() &&
+                        !inDistancia.getText().toString().isEmpty() &&
+                        !inNome.getText().toString().isEmpty()) {
+                    if (Double.parseDouble(inCarga.getText().toString()) == 0d ||
+                            Double.parseDouble(inTempo.getText().toString()) == 0d ||
+                            Double.parseDouble(inDistancia.getText().toString()) == 0d) {
+                        btnEncomenda.setVisibility(Button.GONE);
+                    } else {
+                        btnEncomenda.setVisibility(Button.VISIBLE);
+                    }
                 } else {
                     btnEncomenda.setVisibility(Button.GONE);
                 }
