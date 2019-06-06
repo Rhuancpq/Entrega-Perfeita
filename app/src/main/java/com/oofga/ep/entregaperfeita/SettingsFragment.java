@@ -3,6 +3,8 @@ package com.oofga.ep.entregaperfeita;//
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,31 @@ public class SettingsFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonClicked(v);
+            }
+        });
+
+        inMargem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!inMargem.getText().toString().isEmpty()) {
+                    if (Double.parseDouble(inMargem.getText().toString()) == 0d) {
+                        button.setVisibility(Button.GONE);
+                    } else {
+                        button.setVisibility(Button.VISIBLE);
+                    }
+                } else {
+                    button.setVisibility(Button.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         return view;

@@ -26,7 +26,7 @@
         android:layout_marginLeft="32dp"
         android:text="Nome do frete:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/inNome"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -58,13 +58,14 @@
         android:layout_marginTop="8dp"
         android:text="Cadastre a encomenda:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#00143A"
         app:layout_constraintEnd_toStartOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <EditText
-        android:id="@+id/inName"
+        android:id="@+id/inNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -81,11 +82,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/inCarga"
         app:layout_constraintEnd_toStartOf="@+id/unidadeKm"
-        app:layout_constraintStart_toStartOf="@+id/inName"
-        app:layout_constraintTop_toBottomOf="@+id/inName" />
+        app:layout_constraintStart_toStartOf="@+id/inNome"
+        app:layout_constraintTop_toBottomOf="@+id/inNome" />
 
     <EditText
         android:id="@+id/inCarga"
@@ -93,10 +94,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/inTempo"
         app:layout_constraintEnd_toStartOf="@+id/unidadeKg"
-        app:layout_constraintStart_toStartOf="@+id/inName"
+        app:layout_constraintStart_toStartOf="@+id/inNome"
         app:layout_constraintTop_toBottomOf="@+id/inDistancia" />
 
     <TextView
@@ -120,12 +121,12 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/unidadeHr"
+        android:id="@+id/unidadeH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Hr"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:text="h"
         app:layout_constraintBaseline_toBaselineOf="@+id/inTempo"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -146,10 +147,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/unidadeHr"
-        app:layout_constraintStart_toStartOf="@+id/inName" />
+        app:layout_constraintEnd_toStartOf="@+id/unidadeH"
+        app:layout_constraintStart_toStartOf="@+id/inNome" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -170,9 +171,11 @@
         android:layout_marginBottom="8dp"
         android:text="Definir Veículo"
         android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:visibility="gone" />
 
 </android.support.constraint.ConstraintLayout>
