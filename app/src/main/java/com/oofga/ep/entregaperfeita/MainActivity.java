@@ -223,6 +223,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax){
         selectionFragment = new SelectionFragment();
+        selectionFragment.setVeiculoRapido(frota.veiculoMaisRapido(carga,
+                distancia,tempoMax,margemLucro));
+        selectionFragment.setVeiculoBarato(frota.veiculoMenorCusto(carga,
+                distancia,tempoMax,margemLucro));
+        selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorBeneficio(carga,
+                distancia, tempoMax, margemLucro));
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragmentContainer2, selectionFragment);

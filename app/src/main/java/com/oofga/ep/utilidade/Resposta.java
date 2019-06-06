@@ -4,20 +4,20 @@ package com.oofga.ep.utilidade;//
 // ep2
 //
 public class Resposta {
-    private boolean bool;
+    private boolean valid;
     private String string;
     private double first;
     private double second;
 
-    public Resposta(boolean bool, String string, double first, double second){
-        this.bool = bool;
+    public Resposta(boolean valid, String string, double first, double second){
+        this.valid = valid;
         this.string = string;
         this.first = first;
         this.second = second;
     }
 
-    public boolean isBool() {
-        return bool;
+    public boolean isValid() {
+        return valid;
     }
 
     public String getString() {
