@@ -77,6 +77,7 @@ public class SelectionFragment extends Fragment {
                 tipoVRapido.setVisibility(EditText.VISIBLE);
                 tempoVRapido.setVisibility(EditText.VISIBLE);
                 custoVRapido.setVisibility(EditText.VISIBLE);
+                txtRapido.setVisibility(EditText.VISIBLE);
             }
 
             if (veiculoBarato.isValid()) {
@@ -88,6 +89,7 @@ public class SelectionFragment extends Fragment {
                 tipoVCusto.setVisibility(EditText.VISIBLE);
                 tempoVCusto.setVisibility(EditText.VISIBLE);
                 custoVCusto.setVisibility(EditText.VISIBLE);
+                txtCusto.setVisibility(EditText.VISIBLE);
             }
 
             if (veiculoBeneficio.isValid()) {
@@ -96,9 +98,10 @@ public class SelectionFragment extends Fragment {
                 tempoVBeneficio.setText(temp);
                 temp = veiculoBeneficio.getCustoTotal().toString() + "R$";
                 custoVBeneficio.setText(temp);
-                tipoVCusto.setVisibility(EditText.VISIBLE);
-                tempoVCusto.setVisibility(EditText.VISIBLE);
-                custoVCusto.setVisibility(EditText.VISIBLE);
+                tipoVBeneficio.setVisibility(EditText.VISIBLE);
+                tempoVBeneficio.setVisibility(EditText.VISIBLE);
+                custoVBeneficio.setVisibility(EditText.VISIBLE);
+                txtBeneficio.setVisibility(EditText.VISIBLE);
             }
         }else {
             temp = "Não há nenhum veículo possível para esta entrega";

@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity
         fbtnEntrega.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fbtnEntregaListener(v);
+                if (frota.getLista().isEmpty()) {
+                    String text = "A Frota está vazia impossível realizar encomenda";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+                    toast.show();
+                } else
+                    fbtnEntregaListener(v);
             }
         });
     }
@@ -184,10 +189,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case "Remover":
                 if (verificarVeiculos(tipo, quantidade)) {
-                    frota.removerVeiculos(tipo,quantidade);
-                }else{
+                    frota.removerVeiculos(tipo, quantidade);
+                } else {
                     String text = "Quantidade disponivel é menor do que a quantidade que deseja remover";
-                    Toast toast = Toast.makeText(getApplicationContext(),text, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
                     toast.show();
                 }
                 break;
@@ -222,18 +227,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBtnVeiculoClick(Resposta resposta){
+    public void onBtnVeiculoClick(Resposta resposta) {
         // do nothing
     }
 
 
     @Override
-    public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax){
+    public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax) {
         selectionFragment = new SelectionFragment();
         selectionFragment.setVeiculoRapido(frota.veiculoMaisRapido(carga,
-                distancia,tempoMax,margemLucro));
+                distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBarato(frota.veiculoMenorCusto(carga,
-                distancia,tempoMax,margemLucro));
+                distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorBeneficio(carga,
                 distancia, tempoMax, margemLucro));
         FragmentManager fm = getSupportFragmentManager();
@@ -243,13 +248,13 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private void fbtnEntregaListener(View v){
+    private void fbtnEntregaListener(View v) {
         registerFragment = new RegisterFragment();
         attachFragment(registerFragment);
     }
 
     private void atualizarInformacoes() {
-        if(frota.getLista().isEmpty()){
+        if (frota.getLista().isEmpty()) {
             carretaDisp.setVisibility(EditText.INVISIBLE);
             carretaInd.setVisibility(EditText.INVISIBLE);
             carroDisp.setVisibility(EditText.INVISIBLE);
@@ -264,7 +269,7 @@ public class MainActivity extends AppCompatActivity
             van.setVisibility(EditText.INVISIBLE);
             Dispo.setVisibility(EditText.INVISIBLE);
             Ocupado.setVisibility(EditText.INVISIBLE);
-        }else {
+        } else {
             carretaDisp.setVisibility(EditText.VISIBLE);
             carretaInd.setVisibility(EditText.VISIBLE);
             carroDisp.setVisibility(EditText.VISIBLE);
