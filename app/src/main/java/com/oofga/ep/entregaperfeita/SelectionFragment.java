@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.oofga.ep.utilidade.Resposta;
@@ -59,42 +60,50 @@ public class SelectionFragment extends Fragment {
         btnVRapido.setClickable(false);
         btnVCusto.setClickable(false);
         btnVBeneficio.setClickable(false);
+        atualizarExibicao();
         return view;
     }
 
-    public void atualizarExibição() {
+    public void atualizarExibicao() {
         String temp;
-        if (veiculoRapido.isValid()) {
-            tipoVRapido.setText(veiculoRapido.getString());
-            temp = veiculoRapido.getTempo().toString() + "h";
-            tempoVRapido.setText(temp);
-            temp = veiculoRapido.getCustoTotal().toString() + "R$";
-            custoVRapido.setText(temp);
-        } else {
-            temp = "Não há nenhum veículo possível para esta entrega";
-            txtRapido.setText(temp);
-        }
+        if(veiculoRapido.isValid() || veiculoBarato.isValid()
+        || veiculoBeneficio.isValid()) {
+            if (veiculoRapido.isValid()) {
+                tipoVRapido.setText(veiculoRapido.getString());
+                temp = veiculoRapido.getTempo().toString() + "h";
+                tempoVRapido.setText(temp);
+                temp = veiculoRapido.getCustoTotal().toString() + "R$";
+                custoVRapido.setText(temp);
+                tipoVRapido.setVisibility(EditText.VISIBLE);
+                tempoVRapido.setVisibility(EditText.VISIBLE);
+                custoVRapido.setVisibility(EditText.VISIBLE);
+            }
 
-        if (veiculoBarato.isValid()) {
-            tipoVCusto.setText(veiculoBarato.getString());
-            temp = veiculoBarato.getTempo().toString() + "h";
-            tempoVCusto.setText(temp);
-            temp = veiculoBarato.getCustoTotal().toString() + "R$";
-            custoVCusto.setText(temp);
-        } else {
-            temp = "Não há nenhum veículo possível para esta entrega";
-            txtRapido.setText(temp);
-        }
+            if (veiculoBarato.isValid()) {
+                tipoVCusto.setText(veiculoBarato.getString());
+                temp = veiculoBarato.getTempo().toString() + "h";
+                tempoVCusto.setText(temp);
+                temp = veiculoBarato.getCustoTotal().toString() + "R$";
+                custoVCusto.setText(temp);
+                tipoVCusto.setVisibility(EditText.VISIBLE);
+                tempoVCusto.setVisibility(EditText.VISIBLE);
+                custoVCusto.setVisibility(EditText.VISIBLE);
+            }
 
-        if (veiculoBeneficio.isValid()) {
-            tipoVBeneficio.setText(veiculoBeneficio.getString());
-            temp = veiculoBeneficio.getTempo().toString() + "h";
-            tempoVBeneficio.setText(temp);
-            temp = veiculoBeneficio.getCustoTotal().toString() + "R$";
-            custoVBeneficio.setText(temp);
-        } else {
+            if (veiculoBeneficio.isValid()) {
+                tipoVBeneficio.setText(veiculoBeneficio.getString());
+                temp = veiculoBeneficio.getTempo().toString() + "h";
+                tempoVBeneficio.setText(temp);
+                temp = veiculoBeneficio.getCustoTotal().toString() + "R$";
+                custoVBeneficio.setText(temp);
+                tipoVCusto.setVisibility(EditText.VISIBLE);
+                tempoVCusto.setVisibility(EditText.VISIBLE);
+                custoVCusto.setVisibility(EditText.VISIBLE);
+            }
+        }else {
             temp = "Não há nenhum veículo possível para esta entrega";
             txtRapido.setText(temp);
+            txtRapido.setVisibility(EditText.VISIBLE);
         }
     }
 

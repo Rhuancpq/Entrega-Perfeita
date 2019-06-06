@@ -22,13 +22,17 @@
         android:id="@+id/selectionTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Selecione o Veículo:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#00143A"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
+        app:layout_constraintTop_toTopOf="@+id/view3"
+        app:layout_constraintVertical_bias="0.100000024"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnVBeneficio"

@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
                 distancia, tempoMax, margemLucro));
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragmentContainer2, selectionFragment);
+        ft.replace(R.id.fragmentContainer1, selectionFragment);
         ft.addToBackStack(null);
         ft.commit();
     }
