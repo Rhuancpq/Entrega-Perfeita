@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <Button
-        android:id="@+id/btnVeiculo3"
+        android:id="@+id/btnVBeneficio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -39,13 +39,14 @@
         android:layout_marginBottom="8dp"
         android:text="Selecionar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/custoVeiculo3"
-        app:layout_constraintTop_toBottomOf="@+id/btnVeiculo2" />
+        app:layout_constraintStart_toEndOf="@id/custoVBeneficio"
+        app:layout_constraintTop_toBottomOf="@+id/btnVCusto" />
 
     <Button
-        android:id="@+id/btnVeiculo2"
+        android:id="@+id/btnVCusto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -54,65 +55,73 @@
         android:layout_marginBottom="8dp"
         android:text="Selecionar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/btnVeiculo3"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnVBeneficio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/custoVeiculo2"
-        app:layout_constraintTop_toBottomOf="@+id/btnVeiculo1" />
+        app:layout_constraintStart_toEndOf="@id/custoVCusto"
+        app:layout_constraintTop_toBottomOf="@+id/btnVRapido" />
 
     <Button
-        android:id="@+id/btnVeiculo1"
+        android:id="@+id/btnVRapido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Selecionar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/btnVeiculo2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnVCusto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/custoVeiculo1"
+        app:layout_constraintStart_toEndOf="@id/custoVRapido"
         app:layout_constraintTop_toBottomOf="@+id/selectionTitulo" />
 
     <TextView
-        android:id="@+id/tipoVeiculo3"
+        android:id="@+id/tipoVBeneficio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo3"
-        app:layout_constraintEnd_toStartOf="@+id/tempoVeiculo3"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVBeneficio"
+        app:layout_constraintEnd_toStartOf="@+id/tempoVBeneficio"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tipoVeiculo2"
+        android:id="@+id/tipoVCusto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo2"
-        app:layout_constraintEnd_toStartOf="@+id/tempoVeiculo2"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVCusto"
+        app:layout_constraintEnd_toStartOf="@+id/tempoVCusto"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tipoVeiculo1"
+        android:id="@+id/tipoVRapido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo1"
-        app:layout_constraintEnd_toStartOf="@+id/tempoVeiculo1"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVRapido"
+        app:layout_constraintEnd_toStartOf="@+id/tempoVRapido"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tempoVeiculo3"
+        android:id="@+id/tempoVBeneficio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -120,13 +129,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo3"
-        app:layout_constraintEnd_toStartOf="@+id/custoVeiculo3"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVBeneficio"
+        app:layout_constraintEnd_toStartOf="@+id/custoVBeneficio"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tipoVeiculo3" />
+        app:layout_constraintStart_toEndOf="@+id/tipoVBeneficio"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tempoVeiculo2"
+        android:id="@+id/tempoVCusto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -134,13 +145,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo2"
-        app:layout_constraintEnd_toStartOf="@+id/custoVeiculo2"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVCusto"
+        app:layout_constraintEnd_toStartOf="@+id/custoVCusto"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tipoVeiculo2" />
+        app:layout_constraintStart_toEndOf="@+id/tipoVCusto"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tempoVeiculo1"
+        android:id="@+id/tempoVRapido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -148,43 +161,51 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo1"
-        app:layout_constraintEnd_toStartOf="@+id/custoVeiculo1"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVRapido"
+        app:layout_constraintEnd_toStartOf="@+id/custoVRapido"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tipoVeiculo1" />
+        app:layout_constraintStart_toEndOf="@+id/tipoVRapido"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/custoVeiculo3"
+        android:id="@+id/custoVBeneficio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo3"
-        app:layout_constraintEnd_toStartOf="@+id/btnVeiculo3"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVBeneficio"
+        app:layout_constraintEnd_toStartOf="@+id/btnVBeneficio"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tempoVeiculo3" />
+        app:layout_constraintStart_toEndOf="@+id/tempoVBeneficio"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/custoVeiculo2"
+        android:id="@+id/custoVCusto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo2"
-        app:layout_constraintEnd_toStartOf="@+id/btnVeiculo2"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVCusto"
+        app:layout_constraintEnd_toStartOf="@+id/btnVCusto"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tempoVeiculo2" />
+        app:layout_constraintStart_toEndOf="@+id/tempoVCusto"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/custoVeiculo1"
+        android:id="@+id/custoVRapido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnVeiculo1"
-        app:layout_constraintEnd_toStartOf="@+id/btnVeiculo1"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnVRapido"
+        app:layout_constraintEnd_toStartOf="@+id/btnVRapido"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tempoVeiculo1" />
+        app:layout_constraintStart_toEndOf="@+id/tempoVRapido"
+        tools:visibility="invisible" />
 
     <TextView
-        android:id="@+id/rapido"
+        android:id="@+id/txtRapido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -193,12 +214,13 @@
         android:layout_marginBottom="8dp"
         android:text="Veículo mais rápido:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/tipoVeiculo1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tipoVRapido"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectionTitulo" />
 
     <TextView
-        android:id="@+id/barato"
+        android:id="@+id/txtBarato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -206,12 +228,13 @@
         android:layout_marginBottom="8dp"
         android:text="Veiculo com menor custo:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/tipoVeiculo2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tipoVCusto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipoVeiculo1" />
+        app:layout_constraintTop_toBottomOf="@+id/tipoVRapido" />
 
     <TextView
-        android:id="@+id/beneficio"
+        android:id="@+id/txtBeneficio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -219,9 +242,10 @@
         android:layout_marginBottom="8dp"
         android:text="Veículo com melhor custo benefício:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/tipoVeiculo3"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tipoVBeneficio"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipoVeiculo2" />
+        app:layout_constraintTop_toBottomOf="@+id/tipoVCusto" />
 
 
 </android.support.constraint.ConstraintLayout>
