@@ -6,9 +6,9 @@ public abstract class VeiculoFlex extends Veiculo {
     @Override
     public double calculaRendimento(double carga, int tipoCombustivel){
         if(tipoCombustivel == COMBUSTIVEL_ALCOOL){
-            return rendimentoAlcool - carga*constanteAlcool;
+            return rendimentoAlcool - (carga*constanteAlcool);
         }else if(tipoCombustivel == COMBUSTIVEL_GASOLINA){
-            return rendimentoGasolina - carga*constanteGasolina;
+            return rendimentoGasolina - (carga*constanteGasolina);
         }else{
             return -1;
         }
@@ -19,9 +19,9 @@ public abstract class VeiculoFlex extends Veiculo {
         if (tipoCombustivel == 0) {
             return -1;
         } else if (tipoCombustivel == 1) {
-            return distancia / calculaRendimento(carga,COMBUSTIVEL_ALCOOL) * preco_alcool;
+            return (distancia / calculaRendimento(carga,COMBUSTIVEL_ALCOOL)) * preco_alcool;
         } else if (tipoCombustivel == 2) {
-            return distancia / calculaRendimento(carga,COMBUSTIVEL_GASOLINA) * preco_gasolina;
+            return (distancia / calculaRendimento(carga,COMBUSTIVEL_GASOLINA)) * preco_gasolina;
         } else {
             return -1;
         }

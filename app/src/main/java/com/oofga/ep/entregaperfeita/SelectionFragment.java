@@ -65,10 +65,10 @@ public class SelectionFragment extends Fragment {
     }
 
     public void atualizarExibicao() {
-        String temp;
         if(veiculoRapido.isValid() || veiculoBarato.isValid()
         || veiculoBeneficio.isValid()) {
             if (veiculoRapido.isValid()) {
+                String temp;
                 tipoVRapido.setText(veiculoRapido.getString());
                 temp = veiculoRapido.getTempo().toString() + "h";
                 tempoVRapido.setText(temp);
@@ -81,6 +81,7 @@ public class SelectionFragment extends Fragment {
             }
 
             if (veiculoBarato.isValid()) {
+                String temp;
                 tipoVCusto.setText(veiculoBarato.getString());
                 temp = veiculoBarato.getTempo().toString() + "h";
                 tempoVCusto.setText(temp);
@@ -93,6 +94,7 @@ public class SelectionFragment extends Fragment {
             }
 
             if (veiculoBeneficio.isValid()) {
+                String temp;
                 tipoVBeneficio.setText(veiculoBeneficio.getString());
                 temp = veiculoBeneficio.getTempo().toString() + "h";
                 tempoVBeneficio.setText(temp);
@@ -104,6 +106,7 @@ public class SelectionFragment extends Fragment {
                 txtBeneficio.setVisibility(EditText.VISIBLE);
             }
         }else {
+            String temp;
             temp = "Não há nenhum veículo possível para esta entrega";
             txtRapido.setText(temp);
             txtRapido.setVisibility(EditText.VISIBLE);

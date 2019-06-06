@@ -5,7 +5,7 @@ public abstract class VeiculoDiesel extends Veiculo {
 
     @Override
     public double calculaRendimento(double carga, int tipoCombustivel) {
-        return rendimentoDiesel - carga * constanteDiesel;
+        return rendimentoDiesel - (carga * constanteDiesel);
     }
 
     @Override
