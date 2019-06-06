@@ -21,11 +21,20 @@
 
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_main" android:id="@+id/include"/>
+
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/fragmentContainer"
-            android:layout_margin="5dp">
+        android:id="@+id/fragmentContainer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
 
     </FrameLayout>
 

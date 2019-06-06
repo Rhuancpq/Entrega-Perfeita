@@ -15,5 +15,21 @@ public class Resposta {
         this.first = first;
         this.second = second;
     }
+
+    public boolean isBool() {
+        return bool;
+    }
+
+    public String getString() {
+        return string;
+    }
+
+    public double getFirst() {
+        return first;
+    }
+
+    public double getSecond() {
+        return second;
+    }
 }
 

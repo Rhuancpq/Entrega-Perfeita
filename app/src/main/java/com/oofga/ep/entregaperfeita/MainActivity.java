@@ -2,6 +2,7 @@ package com.oofga.ep.entregaperfeita;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,13 +21,16 @@ import com.oofga.ep.veiculos.Frota;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements SettingsFragment.SettingsListener, ActionFragment.ActionListener {
+        implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
+        RegisterFragment.RegisterListener {
     Frota frota;
     private ArrayList<Frete> fretes;
     SettingsFragment settingsFragment;
     ActionFragment atualActionFragment;
+    RegisterFragment registerFragment;
+    SelectionFragment selectionFragment;
     Button btnAdicionar, btnRemover, btnDesocupar;
-    FloatingActionButton entrega;
+    FloatingActionButton fbtnEntrega, fbtnListaFretes;
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
@@ -55,7 +59,8 @@ public class MainActivity extends AppCompatActivity
         van = findViewById(R.id.van);
         Dispo = findViewById(R.id.Dispo);
         Ocupado = findViewById(R.id.Ocupado);
-        entrega = findViewById(R.id.entrega);
+        fbtnEntrega = findViewById(R.id.entrega);
+        fbtnListaFretes = findViewById(R.id.listaFretes);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +68,15 @@ public class MainActivity extends AppCompatActivity
                 btnAdicionarListener(v);
             }
         });
-
         btnRemover.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnRemoverListener(v);
+            }
+        });
+        fbtnEntrega.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbtnEntregaListener(v);
             }
         });
     }
@@ -130,7 +140,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragmentContainer, settingsFragment);
+            ft.add(R.id.fragmentContainer1, settingsFragment);
             ft.addToBackStack(null);
             ft.commit();
             return true;
@@ -147,22 +157,6 @@ public class MainActivity extends AppCompatActivity
         ft.remove(settingsFragment);
         getSupportFragmentManager().popBackStack();
         ft.commit();
-    }
-
-    private boolean verificarOcupados(String tipo, int quantidade) {
-        switch (tipo) {
-            case "Carreta":
-                return frota.getCarretasOcupadas() >= quantidade;
-            case "Carro":
-                return frota.getCarrosOcupados() >= quantidade;
-            case "Moto":
-                return frota.getMotosOcupadas() >= quantidade;
-            case "Van":
-                return frota.getVansOcupadas() >= quantidade;
-            default:
-                return false;
-
-        }
     }
 
     private boolean verificarVeiculos(String tipo, int quantidade) {
@@ -206,10 +200,10 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private void attachActionFragment(ActionFragment f) {
+    private void attachFragment(Fragment f) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragmentContainer, f);
+        ft.add(R.id.fragmentContainer1, f);
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -217,13 +211,28 @@ public class MainActivity extends AppCompatActivity
     private void btnAdicionarListener(View v) {
         atualActionFragment = new ActionFragment();
         atualActionFragment.setTipoAcao("Adicionar");
-        attachActionFragment(atualActionFragment);
+        attachFragment(atualActionFragment);
     }
 
     private void btnRemoverListener(View v) {
         atualActionFragment = new ActionFragment();
         atualActionFragment.setTipoAcao("Remover");
-        attachActionFragment(atualActionFragment);
+        attachFragment(atualActionFragment);
+    }
+
+    @Override
+    public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax){
+        selectionFragment = new SelectionFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragmentContainer2, selectionFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    private void fbtnEntregaListener(View v){
+        registerFragment = new RegisterFragment();
+        attachFragment(registerFragment);
     }
 
     private void atualizarInformacoes() {
