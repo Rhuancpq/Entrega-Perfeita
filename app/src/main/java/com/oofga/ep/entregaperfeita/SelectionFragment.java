@@ -4,7 +4,6 @@ package com.oofga.ep.entregaperfeita;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.oofga.ep.utilidade.Resposta;
-import com.oofga.ep.veiculos.Frota;
 
 public class SelectionFragment extends Fragment {
     Resposta veiculoRapido, veiculoBarato, veiculoBeneficio;
     SelectionListener selectionCallback;
     Button btnVBeneficio, btnVCusto, btnVRapido;
     TextView tipoVBeneficio, tipoVCusto, tipoVRapido,
-        tempoVBeneficio, tempoVCusto, tempoVRapido,
-        custoVBeneficio, custoVcusto, custoVRapido,
-        txtBeneficio, txtCusto, txtRapido;
+            tempoVBeneficio, tempoVCusto, tempoVRapido,
+            custoVBeneficio, custoVCusto, custoVRapido,
+            txtBeneficio, txtCusto, txtRapido;
 
-    interface SelectionListener{
+    interface SelectionListener {
         void onBtnVeiculoClick(Resposta resposta);
     }
 
@@ -50,7 +48,7 @@ public class SelectionFragment extends Fragment {
         tempoVCusto = view.findViewById(R.id.tempoVCusto);
         tempoVRapido = view.findViewById(R.id.tempoVRapido);
         custoVBeneficio = view.findViewById(R.id.custoVBeneficio);
-        custoVcusto = view.findViewById(R.id.custoVCusto);
+        custoVCusto = view.findViewById(R.id.custoVCusto);
         custoVRapido = view.findViewById(R.id.custoVRapido);
         btnVBeneficio = view.findViewById(R.id.btnVBeneficio);
         btnVCusto = view.findViewById(R.id.btnVCusto);
@@ -58,7 +56,46 @@ public class SelectionFragment extends Fragment {
         txtBeneficio = view.findViewById(R.id.txtBeneficio);
         txtCusto = view.findViewById(R.id.txtBarato);
         txtRapido = view.findViewById(R.id.txtRapido);
+        btnVRapido.setClickable(false);
+        btnVCusto.setClickable(false);
+        btnVBeneficio.setClickable(false);
         return view;
+    }
+
+    public void atualizarExibição() {
+        String temp;
+        if (veiculoRapido.isValid()) {
+            tipoVRapido.setText(veiculoRapido.getString());
+            temp = veiculoRapido.getTempo().toString() + "h";
+            tempoVRapido.setText(temp);
+            temp = veiculoRapido.getCustoTotal().toString() + "R$";
+            custoVRapido.setText(temp);
+        } else {
+            temp = "Não há nenhum veículo possível para esta entrega";
+            txtRapido.setText(temp);
+        }
+
+        if (veiculoBarato.isValid()) {
+            tipoVCusto.setText(veiculoBarato.getString());
+            temp = veiculoBarato.getTempo().toString() + "h";
+            tempoVCusto.setText(temp);
+            temp = veiculoBarato.getCustoTotal().toString() + "R$";
+            custoVCusto.setText(temp);
+        } else {
+            temp = "Não há nenhum veículo possível para esta entrega";
+            txtRapido.setText(temp);
+        }
+
+        if (veiculoBeneficio.isValid()) {
+            tipoVBeneficio.setText(veiculoBeneficio.getString());
+            temp = veiculoBeneficio.getTempo().toString() + "h";
+            tempoVBeneficio.setText(temp);
+            temp = veiculoBeneficio.getCustoTotal().toString() + "R$";
+            custoVBeneficio.setText(temp);
+        } else {
+            temp = "Não há nenhum veículo possível para esta entrega";
+            txtRapido.setText(temp);
+        }
     }
 
     public void setVeiculoRapido(Resposta veiculoRapido) {

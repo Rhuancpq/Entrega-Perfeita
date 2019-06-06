@@ -6,14 +6,14 @@ package com.oofga.ep.utilidade;//
 public class Resposta {
     private boolean valid;
     private String string;
-    private double first;
-    private double second;
+    private Double tempo;
+    private Double custoTotal;
 
-    public Resposta(boolean valid, String string, double first, double second){
+    public Resposta(boolean valid, String string, Double tempo, Double custoTotal){
         this.valid = valid;
         this.string = string;
-        this.first = first;
-        this.second = second;
+        this.tempo = tempo;
+        this.custoTotal = custoTotal;
     }
 
     public boolean isValid() {
@@ -24,12 +24,12 @@ public class Resposta {
         return string;
     }
 
-    public double getFirst() {
-        return first;
+    public Double getTempo() {
+        return tempo;
     }
 
-    public double getSecond() {
-        return second;
+    public Double getCustoTotal() {
+        return custoTotal;
     }
 }
 
