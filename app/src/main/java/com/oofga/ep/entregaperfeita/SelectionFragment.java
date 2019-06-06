@@ -57,6 +57,27 @@ public class SelectionFragment extends Fragment {
         txtBeneficio = view.findViewById(R.id.txtBeneficio);
         txtCusto = view.findViewById(R.id.txtBarato);
         txtRapido = view.findViewById(R.id.txtRapido);
+
+        btnVBeneficio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnVBeneficioClick(v);
+            }
+        });
+
+        btnVCusto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnVCustoClick(v);
+            }
+        });
+
+        btnVRapido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnVRapidoClick(v);
+            }
+        });
         btnVRapido.setClickable(false);
         btnVCusto.setClickable(false);
         btnVBeneficio.setClickable(false);
@@ -78,6 +99,8 @@ public class SelectionFragment extends Fragment {
                 tempoVRapido.setVisibility(EditText.VISIBLE);
                 custoVRapido.setVisibility(EditText.VISIBLE);
                 txtRapido.setVisibility(EditText.VISIBLE);
+                btnVRapido.setVisibility(Button.VISIBLE);
+                btnVRapido.setClickable(true);
             }
 
             if (veiculoBarato.isValid()) {
@@ -91,6 +114,8 @@ public class SelectionFragment extends Fragment {
                 tempoVCusto.setVisibility(EditText.VISIBLE);
                 custoVCusto.setVisibility(EditText.VISIBLE);
                 txtCusto.setVisibility(EditText.VISIBLE);
+                btnVCusto.setVisibility(Button.VISIBLE);
+                btnVCusto.setClickable(true);
             }
 
             if (veiculoBeneficio.isValid()) {
@@ -104,6 +129,8 @@ public class SelectionFragment extends Fragment {
                 tempoVBeneficio.setVisibility(EditText.VISIBLE);
                 custoVBeneficio.setVisibility(EditText.VISIBLE);
                 txtBeneficio.setVisibility(EditText.VISIBLE);
+                btnVBeneficio.setVisibility(Button.VISIBLE);
+                btnVBeneficio.setClickable(true);
             }
         }else {
             String temp;
@@ -111,6 +138,18 @@ public class SelectionFragment extends Fragment {
             txtRapido.setText(temp);
             txtRapido.setVisibility(EditText.VISIBLE);
         }
+    }
+
+    public void btnVBeneficioClick(View view){
+        selectionCallback.onBtnVeiculoClick(veiculoBeneficio);
+    }
+
+    public void btnVCustoClick(View view){
+        selectionCallback.onBtnVeiculoClick(veiculoBarato);
+    }
+
+    public void btnVRapidoClick(View view){
+        selectionCallback.onBtnVeiculoClick(veiculoRapido);
     }
 
     public void setVeiculoRapido(Resposta veiculoRapido) {

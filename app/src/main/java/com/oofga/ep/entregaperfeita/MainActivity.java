@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
     double margemLucro;
+    String nomeAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,6 +242,7 @@ public class MainActivity extends AppCompatActivity
                 distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorBeneficio(carga,
                 distancia, tempoMax, margemLucro));
+        nomeAtual = name;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragmentContainer1, selectionFragment);
