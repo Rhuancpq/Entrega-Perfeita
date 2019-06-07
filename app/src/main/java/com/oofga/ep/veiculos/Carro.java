@@ -5,8 +5,8 @@ package com.oofga.ep.veiculos;//
 //
 public class Carro extends VeiculoFlex {
     Carro() {
-        setCarga_maxima(360);
-        setVelocidade_media(100);
+        setCargaMaxima(360);
+        setVelocidadeMedia(100);
         setTipo("Carro");
         setRendimentoAlcool(12);
         setRendimentoGasolina(14);

@@ -13,8 +13,8 @@ public abstract class Veiculo {
     protected static double preco_diesel = 3.869d;
 
     private String tipo;
-    private double carga_maxima;
-    private double velocidade_media;
+    private double cargaMaxima;
+    private double velocidadeMedia;
     private boolean disponivel = true;
 
     public boolean estaDisponivel(){
@@ -30,7 +30,7 @@ public abstract class Veiculo {
     }
 
     public boolean naoSuportaCarga(double carga){
-        return carga > carga_maxima;
+        return carga > cargaMaxima;
     }
 
     public String getTipo() {
@@ -41,20 +41,12 @@ public abstract class Veiculo {
         this.tipo = tipo;
     }
 
-    public double getCarga_maxima() {
-        return carga_maxima;
+    public void setCargaMaxima(double cargaMaxima) {
+        this.cargaMaxima = cargaMaxima;
     }
 
-    public void setCarga_maxima(double carga_maxima) {
-        this.carga_maxima = carga_maxima;
-    }
-
-    public double getVelocidade_media() {
-        return velocidade_media;
-    }
-
-    public void setVelocidade_media(double velocidade_media) {
-        this.velocidade_media = velocidade_media;
+    public void setVelocidadeMedia(double velocidadeMedia) {
+        this.velocidadeMedia = velocidadeMedia;
     }
 
     abstract double calculaRendimento(double carga, int tipoCombustivel);
@@ -62,7 +54,7 @@ public abstract class Veiculo {
     abstract double calculaCusto(double distancia, double carga, int tipoCombustivel);
 
     double calculaTempo(double distancia) {
-        return distancia / velocidade_media;
+        return distancia / velocidadeMedia;
     }
 
 }

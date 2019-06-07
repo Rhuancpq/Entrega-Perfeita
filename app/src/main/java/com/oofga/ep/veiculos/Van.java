@@ -5,8 +5,8 @@ package com.oofga.ep.veiculos;//
 //
 public class Van extends VeiculoDiesel {
     Van() {
-        setCarga_maxima(3500);
-        setVelocidade_media(80);
+        setCargaMaxima(3500);
+        setVelocidadeMedia(80);
         setTipo("Van");
         setConstanteDiesel(0.001d);
         setRendimentoDiesel(10d);

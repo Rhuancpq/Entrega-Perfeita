@@ -5,8 +5,8 @@ package com.oofga.ep.veiculos;//
 //
 public class Carreta extends VeiculoDiesel {
     Carreta() {
-        setCarga_maxima(30000d);
-        setVelocidade_media(60d);
+        setCargaMaxima(30000d);
+        setVelocidadeMedia(60d);
         setTipo("Carreta");
         setConstanteDiesel(0.0002d);
         setRendimentoDiesel(8d);
