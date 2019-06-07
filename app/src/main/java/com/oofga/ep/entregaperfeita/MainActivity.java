@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSettingsButtonClick(double margem) {
-        margemLucro = margem;
+        margemLucro = margem/100;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);

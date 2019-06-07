@@ -53,7 +53,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!inMargem.getText().toString().isEmpty()) {
-                    if (Double.parseDouble(inMargem.getText().toString()) == 0d) {
+                    final double temp = Double.parseDouble(inMargem.getText().toString());
+                    if (temp == 0d || temp == 100) {
                         button.setVisibility(Button.GONE);
                     } else {
                         button.setVisibility(Button.VISIBLE);
