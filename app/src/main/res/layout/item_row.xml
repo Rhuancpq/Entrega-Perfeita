@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp">
+    <TextView
+        android:id="@+id/txtNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/txtId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+    <TextView
+        android:id="@+id/txtVeiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+    <TextView
+        android:id="@+id/txtDistancia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+    <TextView
+        android:id="@+id/txtCarga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+    <TextView
+        android:id="@+id/txtTempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+    <TextView
+        android:id="@+id/txtCusto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" />
+
+</LinearLayout>

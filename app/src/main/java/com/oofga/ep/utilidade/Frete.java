@@ -2,7 +2,8 @@ package com.oofga.ep.utilidade;
 
 public class Frete {
     private String nome, veiculo;
-    private double custo, carga, tempo;
+    private double custo, carga, tempo, distancia;
+    private int id;
 
     public String getNome() {
         return nome;
@@ -28,8 +29,24 @@ public class Frete {
         this.custo = custo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public double getCarga() {
         return carga;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 
     public void setCarga(double carga) {

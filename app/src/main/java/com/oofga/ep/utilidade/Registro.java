@@ -6,15 +6,15 @@ import java.math.RoundingMode;
 // Created by rhuan on 17/05/19.
 // ep2
 //
-public class Resposta {
+public class Registro {
     private boolean valid;
-    private String string;
+    private String tipoVeiculo;
     private Double tempo;
     private Double custoTotal;
 
-    public Resposta(boolean valid, String string, Double tempo, Double custoTotal){
+    public Registro(boolean valid, String tipoVeiculo, Double tempo, Double custoTotal){
         this.valid = valid;
-        this.string = string;
+        this.tipoVeiculo = tipoVeiculo;
         this.tempo = tempo;
         this.custoTotal = custoTotal;
         this.tempo = BigDecimal.valueOf(this.tempo).
@@ -27,8 +27,8 @@ public class Resposta {
         return valid;
     }
 
-    public String getString() {
-        return string;
+    public String getTipoVeiculo() {
+        return tipoVeiculo;
     }
 
     public Double getTempo() {

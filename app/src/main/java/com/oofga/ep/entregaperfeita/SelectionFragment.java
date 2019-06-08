@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.oofga.ep.utilidade.Resposta;
+import com.oofga.ep.utilidade.Registro;
 
 public class SelectionFragment extends Fragment {
-    Resposta veiculoRapido, veiculoBarato, veiculoBeneficio;
+    Registro veiculoRapido, veiculoBarato, veiculoBeneficio;
     SelectionListener selectionCallback;
     Button btnVBeneficio, btnVCusto, btnVRapido;
     TextView tipoVBeneficio, tipoVCusto, tipoVRapido,
@@ -23,7 +23,7 @@ public class SelectionFragment extends Fragment {
             txtBeneficio, txtCusto, txtRapido;
 
     interface SelectionListener {
-        void onBtnVeiculoClick(Resposta resposta);
+        void onBtnVeiculoClick(Registro registro);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class SelectionFragment extends Fragment {
         || veiculoBeneficio.isValid()) {
             if (veiculoRapido.isValid()) {
                 String temp;
-                tipoVRapido.setText(veiculoRapido.getString());
+                tipoVRapido.setText(veiculoRapido.getTipoVeiculo());
                 temp = veiculoRapido.getTempo().toString() + "h";
                 tempoVRapido.setText(temp);
                 temp = veiculoRapido.getCustoTotal().toString() + "R$";
@@ -105,7 +105,7 @@ public class SelectionFragment extends Fragment {
 
             if (veiculoBarato.isValid()) {
                 String temp;
-                tipoVCusto.setText(veiculoBarato.getString());
+                tipoVCusto.setText(veiculoBarato.getTipoVeiculo());
                 temp = veiculoBarato.getTempo().toString() + "h";
                 tempoVCusto.setText(temp);
                 temp = veiculoBarato.getCustoTotal().toString() + "R$";
@@ -120,7 +120,7 @@ public class SelectionFragment extends Fragment {
 
             if (veiculoBeneficio.isValid()) {
                 String temp;
-                tipoVBeneficio.setText(veiculoBeneficio.getString());
+                tipoVBeneficio.setText(veiculoBeneficio.getTipoVeiculo());
                 temp = veiculoBeneficio.getTempo().toString() + "h";
                 tempoVBeneficio.setText(temp);
                 temp = veiculoBeneficio.getCustoTotal().toString() + "R$";
@@ -152,15 +152,15 @@ public class SelectionFragment extends Fragment {
         selectionCallback.onBtnVeiculoClick(veiculoRapido);
     }
 
-    public void setVeiculoRapido(Resposta veiculoRapido) {
+    public void setVeiculoRapido(Registro veiculoRapido) {
         this.veiculoRapido = veiculoRapido;
     }
 
-    public void setVeiculoBarato(Resposta veiculoBarato) {
+    public void setVeiculoBarato(Registro veiculoBarato) {
         this.veiculoBarato = veiculoBarato;
     }
 
-    public void setVeiculoBeneficio(Resposta veiculoBeneficio) {
+    public void setVeiculoBeneficio(Registro veiculoBeneficio) {
         this.veiculoBeneficio = veiculoBeneficio;
     }
 }

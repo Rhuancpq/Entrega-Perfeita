@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oofga.ep.utilidade.Frete;
-import com.oofga.ep.utilidade.Resposta;
+import com.oofga.ep.utilidade.Registro;
 import com.oofga.ep.veiculos.Frota;
 
 import java.util.ArrayList;
@@ -25,18 +25,22 @@ public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
         RegisterFragment.RegisterListener, SelectionFragment.SelectionListener {
     Frota frota;
+    Frete freteAtual;
     private ArrayList<Frete> fretes;
+    boolean settingsOpened;
+    int uniqueId = 1;
     SettingsFragment settingsFragment;
     ActionFragment atualActionFragment;
+    RecordFragment recordFragment;
     RegisterFragment registerFragment;
     SelectionFragment selectionFragment;
+    Toolbar toolbar;
     Button btnAdicionar, btnRemover, btnDesocupar;
     FloatingActionButton fbtnEntrega, fbtnListaFretes;
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
     double margemLucro;
-    String nomeAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +67,9 @@ public class MainActivity extends AppCompatActivity
         Ocupado = findViewById(R.id.Ocupado);
         fbtnEntrega = findViewById(R.id.entrega);
         fbtnListaFretes = findViewById(R.id.listaFretes);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        settingsOpened = false;
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnAdicionarListener(v);
@@ -79,11 +84,20 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if (frota.getLista().isEmpty()) {
-                    String text = "A Frota está vazia impossível realizar encomenda";
+                    String text = "A Frota está vazia, impossível realizar encomenda";
                     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
                     toast.show();
-                } else
-                    fbtnEntregaListener(v);
+                } else fbtnEntregaListener(v);
+            }
+        });
+        fbtnListaFretes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fretes.isEmpty()) {
+                    String text = "A Lista de Fretes está vazia, impossível listar fretes";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+                    toast.show();
+                } else fbtnListaFretesListener(v);
             }
         });
     }
@@ -145,12 +159,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.fragmentContainer1, settingsFragment);
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
+            if (settingsOpened = false) {
+                settingsOpened = true;
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.add(R.id.fragmentContainer1, settingsFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                return true;
+            } else {
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -158,7 +177,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSettingsButtonClick(double margem) {
-        margemLucro = margem/100;
+        margemLucro = margem / 100;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);
@@ -228,13 +247,31 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBtnVeiculoClick(Resposta resposta) {
-        // do nothing
+    public void onBtnVeiculoClick(Registro registro) {
+        freteAtual.setCusto(registro.getCustoTotal());
+        freteAtual.setTempo(registro.getTempo());
+        freteAtual.setVeiculo(registro.getTipoVeiculo());
+        fretes.add(freteAtual);
+        frota.ocuparVeiculo(registro.getTipoVeiculo());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(selectionFragment);
+        fm.popBackStack();
+        ft.remove(registerFragment);
+        fm.popBackStack();
+        ft.commit();
+        atualizarInformacoes();
     }
 
 
     @Override
     public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax) {
+        freteAtual = new Frete();
+        freteAtual.setNome(name);
+        freteAtual.setCarga(carga);
+        freteAtual.setId(uniqueId);
+        uniqueId++;
+        freteAtual.setDistancia(distancia);
         selectionFragment = new SelectionFragment();
         selectionFragment.setVeiculoRapido(frota.veiculoMaisRapido(carga,
                 distancia, tempoMax, margemLucro));
@@ -242,7 +279,6 @@ public class MainActivity extends AppCompatActivity
                 distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorBeneficio(carga,
                 distancia, tempoMax, margemLucro));
-        nomeAtual = name;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragmentContainer1, selectionFragment);
@@ -253,6 +289,12 @@ public class MainActivity extends AppCompatActivity
     private void fbtnEntregaListener(View v) {
         registerFragment = new RegisterFragment();
         attachFragment(registerFragment);
+    }
+
+    private void fbtnListaFretesListener(View v){
+        recordFragment = new RecordFragment();
+        recordFragment.presetValues(fretes);
+        attachFragment(recordFragment);
     }
 
     private void atualizarInformacoes() {

@@ -1,6 +1,6 @@
 package com.oofga.ep.veiculos;//
 
-import com.oofga.ep.utilidade.Resposta;
+import com.oofga.ep.utilidade.Registro;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -188,7 +188,7 @@ public class Frota {
         }
     }
 
-    public Resposta veiculoMenorCusto(double carga, double distancia, double tempoMax, double margemLucro) {
+    public Registro veiculoMenorCusto(double carga, double distancia, double tempoMax, double margemLucro) {
         double menorCusto = 0;
         String tipoVeiculo = "";
         double tempo = 0;
@@ -214,13 +214,13 @@ public class Frota {
             }
         }
         if (tipoVeiculo.isEmpty()) {
-            return new Resposta(false, tipoVeiculo, tempo, menorCusto);
+            return new Registro(false, tipoVeiculo, tempo, menorCusto);
         } else {
-            return new Resposta(true, tipoVeiculo, tempo, lucro(menorCusto,margemLucro));
+            return new Registro(true, tipoVeiculo, tempo, lucro(menorCusto,margemLucro));
         }
     }
 
-    public Resposta veiculoMaisRapido(double carga, double distancia, double tempoMax, double margemLucro) {
+    public Registro veiculoMaisRapido(double carga, double distancia, double tempoMax, double margemLucro) {
         double custo = 0;
         String tipoVeiculo = "";
         double menorTempo = 0;
@@ -246,13 +246,13 @@ public class Frota {
             }
         }
         if (tipoVeiculo.isEmpty()) {
-            return new Resposta(false, tipoVeiculo, menorTempo, custo);
+            return new Registro(false, tipoVeiculo, menorTempo, custo);
         } else {
-            return new Resposta(true, tipoVeiculo, menorTempo, lucro(custo,margemLucro));
+            return new Registro(true, tipoVeiculo, menorTempo, lucro(custo,margemLucro));
         }
     }
 
-    public Resposta veiculoMelhorBeneficio(double carga, double distancia, double tempoMax, double margemLucro) {
+    public Registro veiculoMelhorBeneficio(double carga, double distancia, double tempoMax, double margemLucro) {
         double menorCusto = 0;
         String tipoVeiculo = "";
         double menorTempo = 0;
@@ -279,9 +279,9 @@ public class Frota {
             }
         }
         if (tipoVeiculo.isEmpty()) {
-            return new Resposta(false, tipoVeiculo, menorTempo, menorCusto);
+            return new Registro(false, tipoVeiculo, menorTempo, menorCusto);
         } else {
-            return new Resposta(true, tipoVeiculo, menorTempo, lucro(menorCusto,margemLucro));
+            return new Registro(true, tipoVeiculo, menorTempo, lucro(menorCusto,margemLucro));
         }
     }
 }
