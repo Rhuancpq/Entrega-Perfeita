@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            if (settingsOpened = false) {
+            if(!settingsOpened) {
                 settingsOpened = true;
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity
                 ft.addToBackStack(null);
                 ft.commit();
                 return true;
-            } else {
+            }else{
                 return true;
             }
         }
@@ -176,12 +176,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        settingsOpened = false;
+    }
+
+
+    @Override
     public void onSettingsButtonClick(double margem) {
+        settingsOpened = false;
         margemLucro = margem / 100;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(settingsFragment);
-        getSupportFragmentManager().popBackStack();
+        fm.popBackStack();
         ft.commit();
     }
 
@@ -221,7 +229,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(atualActionFragment);
-        getSupportFragmentManager().popBackStack();
+        fm.popBackStack();
         atualizarInformacoes();
         ft.commit();
     }
@@ -291,7 +299,7 @@ public class MainActivity extends AppCompatActivity
         attachFragment(registerFragment);
     }
 
-    private void fbtnListaFretesListener(View v){
+    private void fbtnListaFretesListener(View v) {
         recordFragment = new RecordFragment();
         recordFragment.presetValues(fretes);
         attachFragment(recordFragment);
