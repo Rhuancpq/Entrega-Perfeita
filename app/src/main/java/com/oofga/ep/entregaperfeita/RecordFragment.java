@@ -3,6 +3,7 @@ package com.oofga.ep.entregaperfeita;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,15 +25,18 @@ public class RecordFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.record_fragment, container, false);
+        adapter = new FreteAdapter(getActivity().getBaseContext(), freteArrayList);
         recyclerView = view.findViewById(R.id.listaFretes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(
+                getActivity().getBaseContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration
+                (getActivity().getBaseContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     public void presetValues(ArrayList<Frete> fretes){
         freteArrayList = fretes;
-        adapter = new FreteAdapter(getActivity(), freteArrayList);
     }
 
 }

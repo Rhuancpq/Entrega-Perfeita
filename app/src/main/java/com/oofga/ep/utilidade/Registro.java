@@ -18,9 +18,9 @@ public class Registro {
         this.tempo = tempo;
         this.custoTotal = custoTotal;
         this.tempo = BigDecimal.valueOf(this.tempo).
-                setScale(5, RoundingMode.HALF_UP).doubleValue();
+                setScale(2, RoundingMode.HALF_UP).doubleValue();
         this.custoTotal = BigDecimal.valueOf(this.custoTotal).
-                setScale(5, RoundingMode.HALF_UP).doubleValue();
+                setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public boolean isValid() {
