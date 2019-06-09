@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
-    double margemLucro;
+    double margemLucro, custoTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         settingsOpened = false;
+        custoTotal = 0;
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnAdicionarListener(v);
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         super.onBackPressed();
         settingsOpened = false;
+        toolbar.setVisibility(Toolbar.VISIBLE);
     }
 
 
@@ -260,6 +262,7 @@ public class MainActivity extends AppCompatActivity
         freteAtual.setTempo(registro.getTempo());
         freteAtual.setVeiculo(registro.getTipoVeiculo());
         fretes.add(freteAtual);
+        custoTotal += registro.getCustoTotal();
         frota.ocuparVeiculo(registro.getTipoVeiculo());
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -300,8 +303,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fbtnListaFretesListener(View v) {
+        toolbar.setVisibility(Toolbar.GONE);
         recordFragment = new RecordFragment();
-        recordFragment.presetValues(fretes);
+        recordFragment.presetValues(fretes, custoTotal);
         attachFragment(recordFragment);
     }
 

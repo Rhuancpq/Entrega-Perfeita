@@ -27,11 +27,11 @@ public class FreteHolder extends RecyclerView.ViewHolder {
         txtNome.setText(frete.getNome());
         txtId.setText(String.format(Locale.getDefault(),"Id: %d", frete.getId()));
         txtDistancia.setText(String.format(Locale.getDefault(),
-                "Distância: %fKm",frete.getDistancia()));
+                "Distância: %.2fKm",frete.getDistancia()));
         txtCusto.setText(String.format(Locale.getDefault(),
-                "Custo: %fR$",frete.getCusto()));
-        txtTempo.setText(String.format(Locale.getDefault(),"Tempo: %fh",frete.getTempo()));
+                "Custo: %.2fR$",frete.getCusto()));
+        txtTempo.setText(String.format(Locale.getDefault(),"Tempo: %.2fh",frete.getTempo()));
         txtVeiculo.setText(String.format(Locale.getDefault(),"Veículo: %s",frete.getVeiculo()));
-        txtCarga.setText(String.format(Locale.getDefault(), "Carga %fKg",frete.getCarga()));
+        txtCarga.setText(String.format(Locale.getDefault(), "Carga %.2fKg",frete.getCarga()));
     }
 }
