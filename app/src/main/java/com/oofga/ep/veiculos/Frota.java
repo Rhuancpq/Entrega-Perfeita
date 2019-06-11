@@ -188,11 +188,13 @@ public class Frota {
         }
     }
 
-    public Registro veiculoMenorCusto(double carga, double distancia, double tempoMax, double margemLucro) {
+    public Registro veiculoMenorCusto(double carga, double distancia,
+                                      double tempoMax, double margemLucro) {
         double menorCusto = 0;
         String tipoVeiculo = "";
         double tempo = 0;
         for (Veiculo x : lista) {
+            if(!x.estaDisponivel()) continue;
             if (x.naoSuportaCarga(carga)) {
                 continue;
             }
@@ -220,11 +222,13 @@ public class Frota {
         }
     }
 
-    public Registro veiculoMaisRapido(double carga, double distancia, double tempoMax, double margemLucro) {
+    public Registro veiculoMaisRapido(double carga, double distancia,
+                                      double tempoMax, double margemLucro) {
         double custo = 0;
         String tipoVeiculo = "";
         double menorTempo = 0;
         for (Veiculo x : lista) {
+            if(!x.estaDisponivel()) continue;
             if (x.naoSuportaCarga(carga)) {
                 continue;
             }
@@ -252,11 +256,14 @@ public class Frota {
         }
     }
 
-    public Registro veiculoMelhorBeneficio(double carga, double distancia, double tempoMax, double margemLucro) {
-        double menorCusto = 0;
+    public Registro veiculoMelhorCustoBeneficio(double carga, double distancia,
+                                                double tempoMax, double margemLucro) {
+        double custo = 0;
         String tipoVeiculo = "";
-        double menorTempo = 0;
+        double tempo = 0;
+        double custoBeneficio = 0;
         for (Veiculo x : lista) {
+            if(!x.estaDisponivel()) continue;
             if (x.naoSuportaCarga(carga)) {
                 continue;
             }
@@ -265,23 +272,23 @@ public class Frota {
             }
             if(x.getTipo().equals(tipoVeiculo)) continue;
             if (tipoVeiculo.isEmpty()) {
-                menorTempo = x.calculaTempo(distancia);
+                custoBeneficio = (calculaCusto(x, distancia, carga))/(x.calculaTempo(distancia));
+                tempo = x.calculaTempo(distancia);
                 tipoVeiculo = x.getTipo();
-                menorCusto = calculaCusto(x, distancia, carga);
+                custo = calculaCusto(x, distancia, carga);
             } else {
-                double tempo = x.calculaTempo(distancia);
-                double custoTemp = calculaCusto(x, distancia, carga);
-                if (tempo <= menorTempo && custoTemp <= menorCusto) {
-                    menorTempo = tempo;
+                double custoBeneficioTemp = (calculaCusto(x, distancia, carga))/(x.calculaTempo(distancia));
+                if (custoBeneficioTemp <= custoBeneficio) {
+                    tempo = x.calculaTempo(distancia);
                     tipoVeiculo = x.getTipo();
-                    menorCusto = custoTemp;
+                    custo = calculaCusto(x,distancia,carga);
                 }
             }
         }
         if (tipoVeiculo.isEmpty()) {
-            return new Registro(false, tipoVeiculo, menorTempo, menorCusto);
+            return new Registro(false, tipoVeiculo, tempo, custo);
         } else {
-            return new Registro(true, tipoVeiculo, menorTempo, lucro(menorCusto,margemLucro));
+            return new Registro(true, tipoVeiculo, tempo, lucro(custo,margemLucro));
         }
     }
 }

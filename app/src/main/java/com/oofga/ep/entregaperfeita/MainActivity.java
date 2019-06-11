@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity
                 distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBarato(frota.veiculoMenorCusto(carga,
                 distancia, tempoMax, margemLucro));
-        selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorBeneficio(carga,
+        selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorCustoBeneficio(carga,
                 distancia, tempoMax, margemLucro));
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
