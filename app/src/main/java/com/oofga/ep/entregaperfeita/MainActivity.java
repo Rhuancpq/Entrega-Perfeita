@@ -20,10 +20,12 @@ import com.oofga.ep.utilidade.Registro;
 import com.oofga.ep.veiculos.Frota;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
-        RegisterFragment.RegisterListener, SelectionFragment.SelectionListener {
+        RegisterFragment.RegisterListener, SelectionFragment.SelectionListener,
+        RecordFragment.RecordListener, RemoveFragment.RemoveListener {
     Frota frota;
     Frete freteAtual;
     private ArrayList<Frete> fretes;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     SettingsFragment settingsFragment;
     ActionFragment atualActionFragment;
     RecordFragment recordFragment;
+    RemoveFragment removeFragment;
     RegisterFragment registerFragment;
     SelectionFragment selectionFragment;
     Toolbar toolbar;
@@ -261,6 +264,8 @@ public class MainActivity extends AppCompatActivity
         freteAtual.setCusto(registro.getCustoTotal());
         freteAtual.setTempo(registro.getTempo());
         freteAtual.setVeiculo(registro.getTipoVeiculo());
+        freteAtual.setId(uniqueId);
+        uniqueId++;
         fretes.add(freteAtual);
         custoTotal += registro.getCustoTotal();
         frota.ocuparVeiculo(registro.getTipoVeiculo());
@@ -280,8 +285,6 @@ public class MainActivity extends AppCompatActivity
         freteAtual = new Frete();
         freteAtual.setNome(name);
         freteAtual.setCarga(carga);
-        freteAtual.setId(uniqueId);
-        uniqueId++;
         freteAtual.setDistancia(distancia);
         selectionFragment = new SelectionFragment();
         selectionFragment.setVeiculoRapido(frota.veiculoMaisRapido(carga,
@@ -295,6 +298,43 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.fragmentContainer1, selectionFragment);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    public void onFbtnRemoverClick(){
+        removeFragment = new RemoveFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragmentContainer1, removeFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onBtnRemoverFreteClick(int Id){
+        boolean invalid = true;
+        Iterator itr = fretes.iterator();
+        while(itr.hasNext()){
+            Frete x = (Frete) itr.next();
+            if(x.getId() == Id){
+                itr.remove();
+                invalid = false;
+                break;
+            }
+        }
+        if (invalid){
+            String text = "Id Inválido";
+            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.remove(removeFragment);
+            fm.popBackStack();
+            ft.remove(recordFragment);
+            fm.popBackStack();
+            ft.commit();
+            atualizarInformacoes();
+        }
     }
 
     private void fbtnEntregaListener(View v) {
