@@ -5,6 +5,7 @@
     <string name="margem_de_lucro">Margem de Lucro:</string>
     <string name="ok">OK</string>
     <string name="percent">%</string>
+    <string name="pref_key">key123</string>
     <string-array name="veiculos">
         <item>Carreta</item>
         <item>Carro</item>

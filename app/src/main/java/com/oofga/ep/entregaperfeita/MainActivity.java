@@ -1,5 +1,7 @@
 package com.oofga.ep.entregaperfeita;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,7 @@ import com.oofga.ep.veiculos.Frota;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
         implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
@@ -38,12 +41,13 @@ public class MainActivity extends AppCompatActivity
     RegisterFragment registerFragment;
     SelectionFragment selectionFragment;
     Toolbar toolbar;
+    SharedPreferences sharedPreferences;
     Button btnAdicionar, btnRemover, btnDesocupar;
     FloatingActionButton fbtnEntrega, fbtnListaFretes;
     TextView carretaDisp, carroDisp, motoDisp, vanDisp,
             carretaInd, carroInd, motoInd, vanInd,
             carreta, carro, moto, van, Dispo, Ocupado;
-    double margemLucro, custoTotal;
+    Double margemLucro, custoTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,10 @@ public class MainActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         settingsOpened = false;
-        custoTotal = 0;
+        custoTotal = 0d;
+        margemLucro = 0d;
+        sharedPreferences = getSharedPreferences(getString(R.string.pref_key),
+                Context.MODE_PRIVATE);
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnAdicionarListener(v);
@@ -109,17 +116,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+        carregarDados();
         atualizarInformacoes();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        carregarDados();
+        atualizarInformacoes();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        persistirDados();
     }
 
     @Override
@@ -130,6 +141,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
+        persistirDados();
     }
 
     @Override
@@ -163,15 +175,16 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            if(!settingsOpened) {
+            if (!settingsOpened) {
                 settingsOpened = true;
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.add(R.id.fragmentContainer1, settingsFragment);
                 ft.addToBackStack(null);
+                persistirDados();
                 ft.commit();
                 return true;
-            }else{
+            } else {
                 return true;
             }
         }
@@ -235,6 +248,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction ft = fm.beginTransaction();
         ft.remove(atualActionFragment);
         fm.popBackStack();
+        persistirDados();
         atualizarInformacoes();
         ft.commit();
     }
@@ -300,7 +314,7 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    public void onFbtnRemoverClick(){
+    public void onFbtnRemoverClick() {
         removeFragment = new RemoveFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -310,22 +324,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBtnRemoverFreteClick(int Id){
+    public void onBtnRemoverFreteClick(int Id) {
         boolean invalid = true;
         Iterator itr = fretes.iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             Frete x = (Frete) itr.next();
-            if(x.getId() == Id){
+            if (x.getId() == Id) {
                 itr.remove();
                 invalid = false;
                 break;
             }
         }
-        if (invalid){
+        if (invalid) {
             String text = "Id Inválido";
             Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
             toast.show();
-        }else{
+        } else {
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.remove(removeFragment);
@@ -333,6 +347,7 @@ public class MainActivity extends AppCompatActivity
             ft.remove(recordFragment);
             fm.popBackStack();
             ft.commit();
+            persistirDados();
             atualizarInformacoes();
         }
     }
@@ -347,6 +362,50 @@ public class MainActivity extends AppCompatActivity
         recordFragment = new RecordFragment();
         recordFragment.presetValues(fretes, custoTotal);
         attachFragment(recordFragment);
+    }
+
+    private void persistirDados() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("margemLucro", margemLucro.toString());
+        editor.putInt("qntCarretas", frota.getQntCarretas());
+        editor.putInt("qntCarros", frota.getQntCarros());
+        editor.putInt("qntMotos", frota.getQntMotos());
+        editor.putInt("qntVans", frota.getQntVans());
+        editor.apply();
+    }
+
+    private void carregarDados() {
+        int qntCarretas = 0, qntCarros = 0, qntMotos = 0, qntVans = 0;
+        if (sharedPreferences.contains("margemLucro")) {
+            String temp = sharedPreferences.getString("margemLucro", "0.0");
+            if (temp != null) {
+                margemLucro = Double.parseDouble((temp));
+            }
+        }
+
+        qntCarretas = sharedPreferences.getInt("qntCarretas", 0);
+
+        qntCarros = sharedPreferences.getInt("qntCarros", 0);
+
+        qntMotos = sharedPreferences.getInt("qntMotos", 0);
+
+        qntVans = sharedPreferences.getInt("qntVans", 0);
+
+        if (qntCarretas != 0) {
+            frota.adicionarVeiculos("Carreta", qntCarretas);
+        }
+
+        if (qntCarros != 0) {
+            frota.adicionarVeiculos("Carros", qntCarros);
+        }
+
+        if (qntMotos != 0) {
+            frota.adicionarVeiculos("Carreta", qntMotos);
+        }
+
+        if (qntVans != 0) {
+            frota.adicionarVeiculos("Carreta", qntVans);
+        }
     }
 
     private void atualizarInformacoes() {
