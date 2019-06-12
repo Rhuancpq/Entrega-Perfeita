@@ -1,4 +1,4 @@
-package com.oofga.ep.utilidade;//
+package com.oofga.ep.Model.Fretes;//
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

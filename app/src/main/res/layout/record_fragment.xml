@@ -25,13 +25,14 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/rounded_gray_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view3" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listaFretes"
@@ -57,8 +58,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="8dp"
         android:text="Custo Total:"
-        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/listaFretes"
         app:layout_constraintStart_toStartOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/view5" />
@@ -72,8 +73,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="TextView"
-        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintStart_toEndOf="@+id/Custo"
         app:layout_constraintTop_toTopOf="@+id/Custo" />
@@ -89,5 +90,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/minus_ic" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
 
 </android.support.constraint.ConstraintLayout>

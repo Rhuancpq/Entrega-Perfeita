@@ -9,7 +9,7 @@
         android:id="@+id/view3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@android:drawable/screen_background_dark_transparent"
+        android:background="#E1F5FE"
         android:clickable="true"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

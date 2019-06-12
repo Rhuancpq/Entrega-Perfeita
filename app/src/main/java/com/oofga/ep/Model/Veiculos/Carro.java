@@ -1,4 +1,4 @@
-package com.oofga.ep.veiculos;//
+package com.oofga.ep.Model.Veiculos;//
 
 // Created by rhuan on 17/05/19.
 // ep2

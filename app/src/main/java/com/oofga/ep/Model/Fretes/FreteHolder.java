@@ -1,4 +1,4 @@
-package com.oofga.ep.utilidade;
+package com.oofga.ep.Model.Fretes;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

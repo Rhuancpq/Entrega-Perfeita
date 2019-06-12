@@ -18,7 +18,7 @@ public class RegisterFragment extends Fragment {
 
     RegisterListener RegisterCallback;
 
-    interface RegisterListener {
+    public interface RegisterListener {
         void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax);
     }
 

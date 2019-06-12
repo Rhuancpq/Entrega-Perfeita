@@ -11,12 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Locale;
+
 // Created by rhuan on 22/05/19.
 // ep2
 //
 public class SettingsFragment extends Fragment {
-    EditText inMargem;
+    private EditText inMargem;
+    private Button button;
+    private Double margem;
+
     SettingsListener activityCallback;
+
     public interface SettingsListener {
         public void onSettingsButtonClick(double margem);
     }
@@ -31,19 +37,23 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    public void setText(Double margemLucro){
+        margem = margemLucro;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.settings_fragment, container,false);
         inMargem = view.findViewById(R.id.inMargem);
-        final Button button =
+        button  =
                 (Button) view.findViewById(R.id.buttonOk);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 buttonClicked(v);
             }
         });
-
+        inMargem.setText(margem.toString());
         inMargem.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

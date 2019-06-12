@@ -18,7 +18,7 @@ public class RemoveFragment extends Fragment {
 
     RemoveListener removeCallback;
 
-    interface RemoveListener{
+    public interface RemoveListener{
         void onBtnRemoverFreteClick(int Id);
     }
 

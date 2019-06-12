@@ -1,4 +1,4 @@
-package com.oofga.ep.veiculos;
+package com.oofga.ep.Model.Veiculos;
 
 public abstract class VeiculoDiesel extends Veiculo {
     private double rendimentoDiesel, constanteDiesel;

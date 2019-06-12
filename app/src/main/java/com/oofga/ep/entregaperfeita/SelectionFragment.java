@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.oofga.ep.utilidade.Registro;
+import com.oofga.ep.Model.Fretes.Registro;
 
 public class SelectionFragment extends Fragment {
     Registro veiculoRapido, veiculoBarato, veiculoBeneficio;
@@ -22,7 +22,7 @@ public class SelectionFragment extends Fragment {
             custoVBeneficio, custoVCusto, custoVRapido,
             txtBeneficio, txtCusto, txtRapido;
 
-    interface SelectionListener {
+    public interface SelectionListener {
         void onBtnVeiculoClick(Registro registro);
     }
 

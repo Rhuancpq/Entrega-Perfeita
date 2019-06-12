@@ -17,18 +17,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oofga.ep.utilidade.Frete;
-import com.oofga.ep.utilidade.Registro;
-import com.oofga.ep.veiculos.Frota;
+import com.oofga.ep.Controller.FreteController;
+import com.oofga.ep.Controller.FrotaController;
+import com.oofga.ep.Model.Fretes.Frete;
+import com.oofga.ep.Model.Fretes.Registro;
+import com.oofga.ep.Model.Veiculos.Frota;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
-        implements SettingsFragment.SettingsListener, ActionFragment.ActionListener,
-        RegisterFragment.RegisterListener, SelectionFragment.SelectionListener,
-        RecordFragment.RecordListener, RemoveFragment.RemoveListener {
+        implements FragmentListener {
     Frota frota;
     Frete freteAtual;
     private ArrayList<Frete> fretes;
@@ -96,8 +94,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 if (frota.getLista().isEmpty()) {
                     String text = "A Frota está vazia, impossível realizar encomenda";
-                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-                    toast.show();
+                    showToast(text);
                 } else fbtnEntregaListener(v);
             }
         });
@@ -106,8 +103,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 if (fretes.isEmpty()) {
                     String text = "A Lista de Fretes está vazia, impossível listar fretes";
-                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-                    toast.show();
+                    showToast(text);
                 } else fbtnListaFretesListener(v);
             }
         });
@@ -121,42 +117,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        carregarDados();
-        atualizarInformacoes();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        persistirDados();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         persistirDados();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -177,12 +140,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             if (!settingsOpened) {
                 settingsOpened = true;
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.add(R.id.fragmentContainer1, settingsFragment);
-                ft.addToBackStack(null);
+                attachFragment(settingsFragment);
+                settingsFragment.setText(margemLucro*100);
                 persistirDados();
-                ft.commit();
                 return true;
             } else {
                 return true;
@@ -197,6 +157,7 @@ public class MainActivity extends AppCompatActivity
         super.onBackPressed();
         settingsOpened = false;
         toolbar.setVisibility(Toolbar.VISIBLE);
+
     }
 
 
@@ -204,53 +165,19 @@ public class MainActivity extends AppCompatActivity
     public void onSettingsButtonClick(double margem) {
         settingsOpened = false;
         margemLucro = margem / 100;
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(settingsFragment);
-        fm.popBackStack();
-        ft.commit();
-    }
-
-    private boolean verificarVeiculos(String tipo, int quantidade) {
-        switch (tipo) {
-            case "Carreta":
-                return frota.getQntCarretasDisp() >= quantidade;
-            case "Carro":
-                return frota.getQntCarrosDisp() >= quantidade;
-            case "Moto":
-                return frota.getQntMotosDisp() >= quantidade;
-            case "Van":
-                return frota.getQntVansDisp() >= quantidade;
-            default:
-                return false;
-
-        }
+        disattachFragment(settingsFragment);
     }
 
     @Override
     public void onActionButtonClick(String tipo, int quantidade, String tipoAcao) {
-        switch (tipoAcao) {
-            case "Adicionar":
-                frota.adicionarVeiculos(tipo, quantidade);
-                break;
-            case "Remover":
-                if (verificarVeiculos(tipo, quantidade)) {
-                    frota.removerVeiculos(tipo, quantidade);
-                } else {
-                    String text = "Quantidade disponivel é menor do que a quantidade que deseja remover";
-                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                break;
+        if (!FrotaController.frotaAction(frota, tipo, quantidade, tipoAcao)) {
+            String text = "Quantidade disponivel é menor do que a quantidade que deseja remover";
+            showToast(text);
         }
         //Removendo o Fragmento da exibição
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(atualActionFragment);
-        fm.popBackStack();
+        disattachFragment(atualActionFragment);
         persistirDados();
         atualizarInformacoes();
-        ft.commit();
     }
 
     private void attachFragment(Fragment f) {
@@ -259,6 +186,37 @@ public class MainActivity extends AppCompatActivity
         ft.add(R.id.fragmentContainer1, f);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    private void disattachFragment(Fragment f) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(f);
+        fm.popBackStack();
+        ft.commit();
+    }
+
+    private void disattachPairFragment(Fragment first, Fragment second) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(first);
+        fm.popBackStack();
+        ft.remove(second);
+        fm.popBackStack();
+        ft.commit();
+    }
+
+    private void replaceFragment(Fragment f) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragmentContainer1, f);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    private void showToast(String text) {
+        Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     private void btnAdicionarListener(View v) {
@@ -275,31 +233,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBtnVeiculoClick(Registro registro) {
-        freteAtual.setCusto(registro.getCustoTotal());
-        freteAtual.setTempo(registro.getTempo());
-        freteAtual.setVeiculo(registro.getTipoVeiculo());
-        freteAtual.setId(uniqueId);
+        FreteController.finalizarFrete(freteAtual, registro, uniqueId);
         uniqueId++;
         fretes.add(freteAtual);
         custoTotal += registro.getCustoTotal();
         frota.ocuparVeiculo(registro.getTipoVeiculo());
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(selectionFragment);
-        fm.popBackStack();
-        ft.remove(registerFragment);
-        fm.popBackStack();
-        ft.commit();
+        disattachPairFragment(selectionFragment,
+                registerFragment);
         atualizarInformacoes();
     }
 
 
     @Override
     public void onRegisterButtonClick(String name, double distancia, double carga, double tempoMax) {
-        freteAtual = new Frete();
-        freteAtual.setNome(name);
-        freteAtual.setCarga(carga);
-        freteAtual.setDistancia(distancia);
+        freteAtual = FreteController.registrarFrete(name, carga, distancia);
         selectionFragment = new SelectionFragment();
         selectionFragment.setVeiculoRapido(frota.veiculoMaisRapido(carga,
                 distancia, tempoMax, margemLucro));
@@ -307,46 +254,22 @@ public class MainActivity extends AppCompatActivity
                 distancia, tempoMax, margemLucro));
         selectionFragment.setVeiculoBeneficio(frota.veiculoMelhorCustoBeneficio(carga,
                 distancia, tempoMax, margemLucro));
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragmentContainer1, selectionFragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        replaceFragment(selectionFragment);
     }
 
     public void onFbtnRemoverClick() {
         removeFragment = new RemoveFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragmentContainer1, removeFragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        replaceFragment(removeFragment);
     }
 
     @Override
     public void onBtnRemoverFreteClick(int Id) {
-        boolean invalid = true;
-        Iterator itr = fretes.iterator();
-        while (itr.hasNext()) {
-            Frete x = (Frete) itr.next();
-            if (x.getId() == Id) {
-                itr.remove();
-                invalid = false;
-                break;
-            }
-        }
-        if (invalid) {
+        if (FreteController.removerFrete(frota,fretes, Id)) {
             String text = "Id Inválido";
-            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-            toast.show();
+            showToast(text);
         } else {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.remove(removeFragment);
-            fm.popBackStack();
-            ft.remove(recordFragment);
-            fm.popBackStack();
-            ft.commit();
+            disattachPairFragment(removeFragment,
+                    recordFragment);
             persistirDados();
             atualizarInformacoes();
         }
@@ -358,7 +281,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fbtnListaFretesListener(View v) {
-        toolbar.setVisibility(Toolbar.GONE);
         recordFragment = new RecordFragment();
         recordFragment.presetValues(fretes, custoTotal);
         attachFragment(recordFragment);
@@ -375,37 +297,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void carregarDados() {
-        int qntCarretas = 0, qntCarros = 0, qntMotos = 0, qntVans = 0;
         if (sharedPreferences.contains("margemLucro")) {
             String temp = sharedPreferences.getString("margemLucro", "0.0");
             if (temp != null) {
                 margemLucro = Double.parseDouble((temp));
             }
         }
-
-        qntCarretas = sharedPreferences.getInt("qntCarretas", 0);
-
-        qntCarros = sharedPreferences.getInt("qntCarros", 0);
-
-        qntMotos = sharedPreferences.getInt("qntMotos", 0);
-
-        qntVans = sharedPreferences.getInt("qntVans", 0);
-
-        if (qntCarretas != 0) {
-            frota.adicionarVeiculos("Carreta", qntCarretas);
-        }
-
-        if (qntCarros != 0) {
-            frota.adicionarVeiculos("Carros", qntCarros);
-        }
-
-        if (qntMotos != 0) {
-            frota.adicionarVeiculos("Carreta", qntMotos);
-        }
-
-        if (qntVans != 0) {
-            frota.adicionarVeiculos("Carreta", qntVans);
-        }
+        frota = new Frota();
+        FrotaController.carregarFrota(sharedPreferences, frota);
     }
 
     private void atualizarInformacoes() {

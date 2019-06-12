@@ -1,6 +1,6 @@
-package com.oofga.ep.veiculos;//
+package com.oofga.ep.Model.Veiculos;//
 
-import com.oofga.ep.utilidade.Registro;
+import com.oofga.ep.Model.Fretes.Registro;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -278,7 +278,7 @@ public class Frota {
                 custo = calculaCusto(x, distancia, carga);
             } else {
                 double custoBeneficioTemp = (calculaCusto(x, distancia, carga))/(x.calculaTempo(distancia));
-                if (custoBeneficioTemp <= custoBeneficio) {
+                if (custoBeneficioTemp >= custoBeneficio) {
                     tempo = x.calculaTempo(distancia);
                     tipoVeiculo = x.getTipo();
                     custo = calculaCusto(x,distancia,carga);

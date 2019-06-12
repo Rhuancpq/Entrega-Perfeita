@@ -11,11 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.oofga.ep.utilidade.Frete;
-import com.oofga.ep.utilidade.FreteAdapter;
+import com.oofga.ep.Model.Fretes.Frete;
+import com.oofga.ep.Model.Fretes.FreteAdapter;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,7 +28,7 @@ public class RecordFragment extends Fragment {
     private double custoTotal;
 
     RecordListener RecorderCallback;
-    interface RecordListener{
+    public interface RecordListener{
         void onFbtnRemoverClick();
     }
 

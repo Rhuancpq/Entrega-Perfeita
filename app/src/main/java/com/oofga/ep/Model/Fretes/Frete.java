@@ -1,4 +1,4 @@
-package com.oofga.ep.utilidade;
+package com.oofga.ep.Model.Fretes;
 
 public class Frete {
     private String nome, veiculo;

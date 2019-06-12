@@ -1,4 +1,4 @@
-package com.oofga.ep.veiculos;
+package com.oofga.ep.Model.Veiculos;
 
 public abstract class VeiculoFlex extends Veiculo {
     private double rendimentoAlcool, rendimentoGasolina,constanteAlcool, constanteGasolina;
