@@ -10,7 +10,13 @@ Dada esta necessidade surgiu o aplicativo **Entrega Perfeita**
 O APK se encontra localizado na raiz do repositório.  
 
 ## Utilização
-
+![alt text](https://imgur.com/ENdV4np)
+![alt text](https://imgur.com/JIHRuNR)
+![alt text](https://imgur.com/0iLTik6)
+![alt text](https://imgur.com/JZyJos5)
+![alt text](https://imgur.com/M012lnc)
+![alt text](https://imgur.com/RhBlYY5)
+![alt text](https://imgur.com/zDCbzSE)
 
 
 ## Informações
