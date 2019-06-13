@@ -10,13 +10,13 @@ Dada esta necessidade surgiu o aplicativo **Entrega Perfeita**
 O APK se encontra localizado na raiz do repositório.  
 
 ## Utilização
-![passo1](https://i.imgur.com/ENdV4np.png)  
-![passo2](https://i.imgur.com/JIHRuNR.png)  
-![passo3](https://i.imgur.com/0iLTik6.png)  
-![passo4](https://i.imgur.com/JZyJos5.png)  
-![passo5](https://i.imgur.com/M012lnc.png)  
-![passo6](https://i.imgur.com/RhBlYY5.png)  
-![passo7](https://i.imgur.com/zDCbzSE.png)  
+<img src="https://i.imgur.com/ENdV4np.png" width="179" height="320">
+<img src="https://i.imgur.com/JIHRuNR.png" width="179" height="320">
+<img src="https://i.imgur.com/0iLTik6.png" width="179" height="320">
+<img src="https://i.imgur.com/JZyJos5.png" width="179" height="320">
+<img src="https://i.imgur.com/M012lnc.png" width="179" height="320">
+<img src="https://i.imgur.com/RhBlYY5.png" width="179" height="320">
+<img src="https://i.imgur.com/zDCbzSE.png" width="179" height="320">
 
 
 ## Informações
